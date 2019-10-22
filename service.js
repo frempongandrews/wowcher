@@ -95,15 +95,18 @@ function getCustomerNamesForProduct(productName) {
     });
 
     console.log(uniqueCustomersNamesForProduct);
+    return uniqueCustomersNamesForProduct;
+
 } 
   
 const getMostPopularProduct = () => {
-  return ['chair']
+  // return ['chair']
+
 };
 
 
 // getOrderCountForProduct("hammer");
-getCustomerNamesForProduct("chair");
+getCustomerNamesForProduct("toothbrush");
   
 module.exports = {
   getOrderCountForUser,
