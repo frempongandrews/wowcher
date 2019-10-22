@@ -37,8 +37,64 @@ const getOrderCountForProduct = function(productName) {
     return orderCount;
 };
   
-function getCustomerNamesForProduct(product) {
-  return ['bob', 'sue']
+function getCustomerNamesForProduct(productName) {
+  // return ['bob', 'sue']
+
+    //get productId
+    let productId;
+    for (product of products) {
+      if (productName === product.productName) {
+        productId = product.productId;
+      }
+    }
+
+
+    //product not found
+    if (!productId) {
+      console.log("********* Product Not Found");
+      return [];
+    }
+
+    let productAndCustomersNamesObj = {
+        //id: { customersNames: []
+                  //}
+    };
+
+    let customersNamesByIdObj = {};
+    users.forEach(user => {
+      customersNamesByIdObj[user.userId] = user.name;
+    });
+
+
+    for (product of products) {
+      if (!productAndCustomersNamesObj[product.productId]) {
+          productAndCustomersNamesObj[product.productId] = {};
+      }
+    }
+
+    orders.forEach((order => {
+      let foundProductId = order.productId;
+      if (productAndCustomersNamesObj[foundProductId]) {
+        //check customers array is already there
+          if ((productAndCustomersNamesObj[foundProductId]).customersNames) {
+            //check if already a customer of the product
+              if (!(productAndCustomersNamesObj[foundProductId]).customersNames.includes(order.userId)) {
+                  (productAndCustomersNamesObj[foundProductId]).customersNames = [customersNamesByIdObj[order.userId], ...((productAndCustomersNamesObj[order.productId]).customersNames)]
+              }
+          } else {
+            //create it and add customer
+              (productAndCustomersNamesObj[order.productId]).customersNames = [customersNamesByIdObj[order.userId]]
+          }
+      }
+    }));
+
+    let customersNamesForProduct = ((productAndCustomersNamesObj[productId]).customersNames);
+
+    let uniqueCustomersNamesForProduct = customersNamesForProduct.filter( (customer, i, arr) => {
+      return arr.indexOf(customer) === i
+    });
+
+    console.log(uniqueCustomersNamesForProduct);
 } 
   
 const getMostPopularProduct = () => {
@@ -46,7 +102,8 @@ const getMostPopularProduct = () => {
 };
 
 
-getOrderCountForProduct("hammer");
+// getOrderCountForProduct("hammer");
+getCustomerNamesForProduct("chair");
   
 module.exports = {
   getOrderCountForUser,
