@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const service = require('./service')
 
-var userCount = 0;
+let userCount = 0;
 
 app.get('/', (req, res) => {res.send('Status: OK')});
 

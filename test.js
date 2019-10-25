@@ -50,9 +50,9 @@ describe('service', function() {
   });
 
   describe('return name of the most popular product', () => {
-    // it('should return chair', () => {
-    //   assert.deepEqual(subject.getMostPopularProduct(), ['chair'], 'most popular product incorrect')
-    // })
+    it('should return chair', () => {
+      assert.deepEqual(subject.getMostPopularProduct(), ['chair'], 'most popular product incorrect')
+    })
   })  
 
 });

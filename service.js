@@ -34,6 +34,7 @@ const getOrderCountForProduct = function(productName) {
         }
       }
     }
+    // console.log(orderCount);
     return orderCount;
 };
   
@@ -102,13 +103,56 @@ function getCustomerNamesForProduct(productName) {
   
 const getMostPopularProduct = () => {
   // return ['chair']
+    //get order count per product
+    //deep clone
+    let productsCopyStr = JSON.stringify(products);
+    let productsCopy = JSON.parse(productsCopyStr);
+    let orderCountPerProductObj = productsCopy.reduce((acc, currentValue, currentIndex, arr) => {
+        acc[currentValue.productName] = getOrderCountForProduct(currentValue.productName)
+        return acc;
+    }, {});
 
+    //console.log(orderCountPerProductObj);
+
+    let orderCountPerProductArr = [];
+
+    for (let prop in orderCountPerProductObj) {
+        orderCountPerProductArr = orderCountPerProductArr.concat({productName: prop, orderCount: orderCountPerProductObj[prop]})
+    }
+
+
+    let mostPopularProductsArr = [];
+    let highestOrderCount = 0;
+
+    orderCountPerProductArr.forEach( (prod, i, arr) => {
+        // console.log(prod);
+        if (prod.orderCount >= highestOrderCount) {
+            highestOrderCount = prod.orderCount;
+            mostPopularProductsArr = [prod.productName];
+        }
+    });
+
+
+    //case of 2 or more products with same orderCount
+    orderCountPerProductArr.forEach( (prod, i, arr) => {
+        // console.log(prod);
+        if (prod.orderCount >= highestOrderCount) {
+            if (!mostPopularProductsArr.includes(prod.productName)) {
+                mostPopularProductsArr = [prod.productName, ...mostPopularProductsArr];
+            }
+        }
+    });
+
+    // console.log(mostPopularProductsArr);
+    return mostPopularProductsArr;
 };
-
 
 // getOrderCountForProduct("hammer");
 // getCustomerNamesForProduct("chair");
-  
+// getOrderCountForProduct("chair");
+
+getMostPopularProduct();
+
 module.exports = {
   getOrderCountForUser,
   getOrderCountForProduct,
