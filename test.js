@@ -30,13 +30,29 @@ describe('service', function() {
   describe('return names of customers that bought item', () => {
     it('should return bob & sue for chair', () => {
       assert.deepEqual(subject.getCustomerNamesForProduct('chair'), ['bob', 'sue'], 'customer name didnt match')
-    })
+    });
+
+    it('should return sam for toothbrush', () => {
+        assert.deepEqual(subject.getCustomerNamesForProduct('toothbrush'), ['sam'], 'customer name didnt match')
+    });
+
+    it('should return bob & sam for hammer', () => {
+        assert.deepEqual(subject.getCustomerNamesForProduct('hammer'), ['bob', 'sam'], 'customer name didnt match')
+    });
+
+    it('should return sam for spoon', () => {
+        assert.deepEqual(subject.getCustomerNamesForProduct('spoon'), ['sam'], 'customer name didnt match')
+    });
+
+    it('should return sue & bob for chair', () => {
+        assert.deepEqual(subject.getCustomerNamesForProduct('chair'), ['bob', 'sue'], 'customer name didnt match')
+    });
   });
 
-  describe('return name of the most popular procduct', () => {
-    it('should return chair', () => {
-      assert.deepEqual(subject.getMostPopularProduct(), ['chair'], 'most popular product incorrect')
-    })
+  describe('return name of the most popular product', () => {
+    // it('should return chair', () => {
+    //   assert.deepEqual(subject.getMostPopularProduct(), ['chair'], 'most popular product incorrect')
+    // })
   })  
 
 });

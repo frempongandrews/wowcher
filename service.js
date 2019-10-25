@@ -90,9 +90,10 @@ function getCustomerNamesForProduct(productName) {
 
     let customersNamesForProduct = ((productAndCustomersNamesObj[productId]).customersNames);
 
+    //sorted to make tests results predictable and thus reliable
     let uniqueCustomersNamesForProduct = customersNamesForProduct.filter( (customer, i, arr) => {
       return arr.indexOf(customer) === i
-    });
+    }).sort();
 
     console.log(uniqueCustomersNamesForProduct);
     return uniqueCustomersNamesForProduct;
@@ -106,7 +107,7 @@ const getMostPopularProduct = () => {
 
 
 // getOrderCountForProduct("hammer");
-getCustomerNamesForProduct("toothbrush");
+getCustomerNamesForProduct("chair");
   
 module.exports = {
   getOrderCountForUser,
