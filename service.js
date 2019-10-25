@@ -107,7 +107,7 @@ const getMostPopularProduct = () => {
 
 
 // getOrderCountForProduct("hammer");
-getCustomerNamesForProduct("chair");
+// getCustomerNamesForProduct("chair");
   
 module.exports = {
   getOrderCountForUser,
