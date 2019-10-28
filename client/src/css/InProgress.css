@@ -1,0 +1,36 @@
+#in-progress{
+    min-height: 93vh;
+    /*background-color: #777777;*/
+    background-color: white;
+}
+
+#in-progress .in-progress-inner-container{
+    display: flex;
+    align-items: center;
+}
+
+
+#in-progress .coming-soon-container{
+    flex: 1;
+    position: relative;
+    top: -60px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#in-progress .coming-soon-container>div p{
+    color: var(--main-pink-color);
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#in-progress .coming-soon-container>div h4{
+    color: grey;
+}
+
+#in-progress .image-container{
+    flex: 0.3;
+}

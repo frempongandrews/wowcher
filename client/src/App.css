@@ -1,0 +1,64 @@
+#App {
+    min-height: 100vh;
+    /*height: 100%;*/
+    background-color: #f0f0f0;
+    /*max-width: 1200px;*/
+}
+
+/*Sidebar*/
+#sidebar{
+    background-color: #222222;
+    /*min-height: 100vmin;*/
+    color: white;
+    padding: 0;
+}
+
+#sidebar #logo-section{
+    height: 150px;
+    padding: 10px;
+}
+
+#sidebar nav ul{
+    padding-left: 0;
+    list-style: none;
+}
+
+#sidebar nav a{
+    color: white;
+    text-decoration: none;
+}
+
+#sidebar nav li{
+    cursor: pointer;
+    padding: 10px;
+    line-height: 40px;
+    transition: all 0.3s ease;
+    /*border-left: 3px solid var(--main-pink-color);*/
+}
+
+#sidebar nav li.active{
+
+}
+
+.active-section{
+    border-left: 3px solid var(--main-pink-color);
+}
+
+#sidebar nav li:hover{
+    background-color: grey;
+    transition: all 0.3s ease;
+}
+
+
+/*Content*/
+#content{
+    /*min-height: 100vmin;*/
+    /*min-height: 100%;*/
+    /*background-color: pink;*/
+    padding: 0;
+}
+
+#content .content-header{
+    height: 60px;
+    background-color: #f0f0f0;
+}
