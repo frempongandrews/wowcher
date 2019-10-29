@@ -40,7 +40,7 @@ class App extends Component {
                 {/*row*/}
                 <div className="row">
                     {/*sidebar*/}
-                    <aside id="sidebar" className="col-sm-3" style={{maxWidth: isSidebarOpened ? "25%" : "0%"}}>
+                    <aside id="sidebar" className="col-sm-3" style={{maxWidth: isSidebarOpened ? "25%" : "0%", transform: isSidebarOpened ? "translateX(0)" : "translateX(-200px)"}}>
                         <div id="logo-section">
                             <div>
                                 <img src={logo} alt="wowcher logo"/>
