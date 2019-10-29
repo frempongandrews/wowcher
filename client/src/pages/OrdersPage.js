@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "../css/OrdersPage.css";
 
 
@@ -6,7 +7,7 @@ class OrdersPage extends Component {
 
     render () {
 
-        const { orders } = this.props;
+        const { orders, onSortOrders } = this.props;
 
         let ordersItems = orders.map(order => {
            return (
@@ -36,7 +37,13 @@ class OrdersPage extends Component {
                     </div>
 
                     <div className="fields">
-                        <li><span>OrderId</span> <i className="fa fa-caret-up" aria-hidden="true" /></li>
+                        <li>
+                            <span>OrderId
+                                <i className="fa fa-caret-up" aria-hidden="true"
+                                   title="Sort By Id"
+                                   onClick={() => onSortOrders()}/>
+                            </span>
+                        </li>
                         <li>Customer</li>
                         <li>Products</li>
                     </div>
@@ -51,5 +58,10 @@ class OrdersPage extends Component {
         )
     }
 }
+
+OrdersPage.propTypes = {
+    orders: PropTypes.array.isRequired,
+    onSortOrders: PropTypes.func.isRequired
+};
 
 export default OrdersPage;

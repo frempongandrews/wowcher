@@ -3,6 +3,7 @@ import axios from "axios";
 export const FETCH_ORDERS_START = "FETCH_ORDERS_START";
 export const FETCH_ORDERS_SUCCESS = "FETCH_ORDERS_SUCCESS";
 export const FETCH_ORDERS_ERROR = "FETCH_ORDERS_ERROR";
+export const SORT_ORDERS = "SORT_ORDERS";
 
 export const fetchAllOrders = () => {
     return (dispatch) => {
@@ -25,5 +26,11 @@ export const fetchAllOrders = () => {
                     error: err.response.data
                 })
             })
+    }
+};
+
+export const sortOrders = () => {
+    return {
+        type: SORT_ORDERS
     }
 };

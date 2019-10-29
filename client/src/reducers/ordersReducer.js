@@ -1,4 +1,4 @@
-import {FETCH_ORDERS_ERROR, FETCH_ORDERS_START, FETCH_ORDERS_SUCCESS} from "../actions/ordersActions";
+import {FETCH_ORDERS_ERROR, FETCH_ORDERS_START, FETCH_ORDERS_SUCCESS, SORT_ORDERS} from "../actions/ordersActions";
 
 let initialState = {
     orders: [],
@@ -45,6 +45,22 @@ const ordersReducer = (state = initialState, action) => {
                 error: action.error
             };
 
+        case SORT_ORDERS:
+            if (state.sortOrder === "ASC") {
+                return {
+                    ...state,
+                    sortOrder: "DSC",
+                    orders: [...state.orders].reverse()
+                }
+            }
+
+            if (state.sortOrder === "DSC") {
+                return {
+                    ...state,
+                    sortOrder: "ASC",
+                    orders: [...state.orders].reverse()
+                }
+            }
         default:
             return state;
     }

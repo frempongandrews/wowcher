@@ -13,7 +13,7 @@ import {closeSidebar, openSidebar} from "./actions/appActions";
 import OrdersPage from "./pages/OrdersPage";
 import ProductsPage from "./pages/ProductsPage";
 import CustomersPage from "./pages/CustomersPage";
-import {fetchAllOrders} from "./actions/ordersActions";
+import {fetchAllOrders, sortOrders} from "./actions/ordersActions";
 import {fetchAllProducts} from "./actions/productsActions";
 import {fetchAllCustomers} from "./actions/customersActions";
 
@@ -36,7 +36,10 @@ class App extends Component {
         dispatch(openSidebar());
     };
 
-
+    onSortOrders = () => {
+        const { dispatch } = this.props;
+        dispatch(sortOrders());
+    };
 
     render () {
 
@@ -51,6 +54,7 @@ class App extends Component {
 
         let ordersPageProps = {
             orders,
+            onSortOrders: this.onSortOrders
         };
 
         return (
