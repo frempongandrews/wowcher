@@ -44,7 +44,6 @@ app.get("/users", (req, res) => {
 
 //***************End Added endpoints ***************
 
-
 //number of orders by a customer
 app.get('/orders/user/:name', (req, res) => {
     const userName = req.params.name;
