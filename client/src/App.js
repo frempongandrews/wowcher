@@ -65,7 +65,10 @@ class App extends Component {
                         {/*header*/}
                         <header className="content-header">
 
-                            <div className="sidebar-control" onClick={isSidebarOpened ? this.onCloseSidebar : this.onOpenSidebar}>
+                            <div className="sidebar-control"
+                                 onClick={isSidebarOpened ? this.onCloseSidebar : this.onOpenSidebar}
+                                 title={isSidebarOpened ? "Hide sidebar" : "Show sidebar"}
+                            >
 
                                 <img src={closeSideBarIcon} alt="close sidebar icon" style={{transform: isSidebarOpened ? "rotate(0deg)" : "rotate(180deg)"}}/>
 
@@ -75,7 +78,7 @@ class App extends Component {
                                 <p>Welcome, Mike</p>
                             </div>
 
-                            <div className="logout">
+                            <div className="logout" title="Logout">
                                 <img src={logoutIcon} alt="logout icon"/>
                             </div>
 

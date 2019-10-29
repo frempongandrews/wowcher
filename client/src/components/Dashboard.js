@@ -1,10 +1,26 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import laptop from "../assets/laptop.jpeg";
 import rightArrow from "../assets/right-arrow.svg";
 import "../css/Dashboard.css";
+import {fetchAllOrders} from "../actions/ordersActions";
+import {fetchAllProducts} from "../actions/productsActions";
+import {fetchAllCustomers} from "../actions/customersActions";
 
 class Dashboard extends Component {
+
+    async componentDidMount () {
+        const { dispatch } = this.props;
+        await dispatch(fetchAllOrders());
+        await dispatch(fetchAllProducts());
+        await dispatch(fetchAllCustomers());
+    }
+
     render () {
+
+        const { customersCount, ordersCount, productsCount } = this.props;
+
         return (
             <div id="dashboard">
                 <div>
@@ -26,7 +42,7 @@ class Dashboard extends Component {
                             <img src={rightArrow} className="right-arrow" alt="right arrow"/>
                             <div>
                                 <h5 className="title">Orders</h5>
-                                <p>100</p>
+                                <p>{ordersCount}</p>
                             </div>
                         </div>
 
@@ -35,7 +51,7 @@ class Dashboard extends Component {
                             <img src={rightArrow} className="right-arrow" alt="right arrow"/>
                             <div>
                                 <h5 className="title">Products</h5>
-                                <p>100</p>
+                                <p>{productsCount}</p>
                             </div>
                         </div>
 
@@ -43,8 +59,8 @@ class Dashboard extends Component {
                         <div className="resource-item">
                             <img src={rightArrow} className="right-arrow" alt="right arrow"/>
                             <div>
-                                <h5 className="title">Users</h5>
-                                <p>100</p>
+                                <h5 className="title">Customers</h5>
+                                <p>{customersCount}</p>
                             </div>
                         </div>
 
@@ -56,4 +72,22 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+    return {
+        ordersCount: state.orders.ordersCount,
+        customersCount: state.customers.customersCount,
+        productsCount: state.products.productsCount
+
+    }
+};
+
+Dashboard.propTypes = {
+    ordersCount: PropTypes.number.isRequired,
+    customersCount: PropTypes.number.isRequired,
+    productsCount: PropTypes.number.isRequired,
+
+
+};
+
+
+export default connect(mapStateToProps)(Dashboard);
