@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import laptop from "../assets/laptop.jpeg";
-import rightArrow from "../assets/highlights_arrow.png";
-import rightArrow1 from "../assets/right-arrow.svg";
+import rightArrow from "../assets/right-arrow.svg";
 import "../css/Dashboard.css";
 
 class Dashboard extends Component {
@@ -24,7 +23,7 @@ class Dashboard extends Component {
                     <div className="resources-container">
 
                         <div className="resource-item">
-                            <img src={rightArrow1} className="right-arrow"/>
+                            <img src={rightArrow} className="right-arrow" alt="right arrow"/>
                             <div>
                                 <h5 className="title">Orders</h5>
                                 <p>100</p>
@@ -33,7 +32,7 @@ class Dashboard extends Component {
 
 
                         <div className="resource-item">
-                            <img src={rightArrow1} className="right-arrow"/>
+                            <img src={rightArrow} className="right-arrow" alt="right arrow"/>
                             <div>
                                 <h5 className="title">Products</h5>
                                 <p>100</p>
@@ -42,7 +41,7 @@ class Dashboard extends Component {
 
 
                         <div className="resource-item">
-                            <img src={rightArrow1} className="right-arrow"/>
+                            <img src={rightArrow} className="right-arrow" alt="right arrow"/>
                             <div>
                                 <h5 className="title">Users</h5>
                                 <p>100</p>

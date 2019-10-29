@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link, NavLink } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import closeSideBarIcon from "./assets/toggle_btn_icon.png";
 import openSideBarIcon from "./assets/toggle_Collapse_btn_icon.png";
 import logoutIcon from "./assets/logout_icon.png";
@@ -8,6 +9,7 @@ import { connect } from "react-redux";
 import './App.css';
 import Dashboard from "./components/Dashboard";
 import InProgress from "./components/InProgress";
+import {closeSidebar, openSidebar} from "./actions/appActions";
 
 class App extends Component {
 
@@ -15,8 +17,19 @@ class App extends Component {
 
     }
 
+    onCloseSidebar = () => {
+        const { dispatch } = this.props;
+        dispatch(closeSidebar());
+    };
+
+    onOpenSidebar = () => {
+        const { dispatch } = this.props;
+        dispatch(openSidebar());
+    };
+
     render () {
 
+        const { isSidebarOpened } = this.props;
         const { pathname } = this.props.location;
 
         return (
@@ -27,11 +40,10 @@ class App extends Component {
                 {/*row*/}
                 <div className="row">
                     {/*sidebar*/}
-                    <aside id="sidebar" className="col-sm-3">
+                    <aside id="sidebar" className="col-sm-3" style={{maxWidth: isSidebarOpened ? "25%" : "0%"}}>
                         <div id="logo-section">
                             <div>
-
-                                <img src={logo}/>
+                                <img src={logo} alt="wowcher logo"/>
                                 <span className="cher">cher</span>
                             </div>
                         </div>
@@ -48,13 +60,15 @@ class App extends Component {
                     {/* /sidebar*/}
 
                     {/*content*/}
-                    <div id="content" className="col-sm-9">
+                    <div id="content" className="col-sm-9" style={{maxWidth: isSidebarOpened ? "75%" : "100%"}}>
 
                         {/*header*/}
                         <header className="content-header">
 
-                            <div className="sidebar-control">
-                                <img src={closeSideBarIcon}/>
+                            <div className="sidebar-control" onClick={isSidebarOpened ? this.onCloseSidebar : this.onOpenSidebar}>
+
+                                <img src={closeSideBarIcon} alt="close sidebar icon" style={{transform: isSidebarOpened ? "rotate(0deg)" : "rotate(180deg)"}}/>
+
                             </div>
 
                             <div className="greeting">
@@ -62,7 +76,7 @@ class App extends Component {
                             </div>
 
                             <div className="logout">
-                                <img src={logoutIcon}/>
+                                <img src={logoutIcon} alt="logout icon"/>
                             </div>
 
                         </header>
@@ -88,8 +102,12 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        state
+        isSidebarOpened: state.app.isSidebarOpened
     }
+};
+
+App.propTypes = {
+    isSidebarOpened: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps)(App);

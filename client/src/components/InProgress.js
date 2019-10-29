@@ -26,7 +26,7 @@ class InProgress extends Component {
                     </div>
 
                     <div className="image-container">
-                       <img src={manPointingLeft}/>
+                       <img src={manPointingLeft} alt="man pointing left"/>
                     </div>
 
                 </div>

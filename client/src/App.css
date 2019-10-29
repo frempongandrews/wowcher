@@ -1,22 +1,26 @@
 #App {
     min-height: 100vh;
-    /*height: 100%;*/
     background-color: #f0f0f0;
-    /*max-width: 1200px;*/
+}
+
+#App .inner-container{
+
 }
 
 /*Sidebar*/
 #sidebar{
     background-color: #111111;
-    /*background-color: black;*/
     color: white;
     padding: 0;
+    overflow: hidden;
+    min-height: 100vh;
+    transition: all 0.3s ease;
 }
 
 #sidebar #logo-section{
     height: 150px;
     padding: 10px;
-    /*background-color: #eb008c;*/
+    overflow-x: scroll !important;
 }
 
 #sidebar #logo-section img{
@@ -48,14 +52,9 @@
     padding: 10px;
     line-height: 40px;
     transition: all 0.3s ease;
-    /*border-left: 3px solid var(--main-pink-color);*/
 }
 
-#sidebar nav li.active{
-
-}
-
-.active-section{
+#sidebar nav li.active-section{
     border-left: 3px solid var(--main-pink-color);
 }
 
@@ -67,6 +66,7 @@
 
 /*Content*/
 #content{
+    flex: 1 1 100px;
     /*min-height: 100vmin;*/
     /*min-height: 100%;*/
     /*background-color: pink;*/
