@@ -7,8 +7,8 @@
 
 /*Sidebar*/
 #sidebar{
-    background-color: #222222;
-    /*min-height: 100vmin;*/
+    background-color: #111111;
+    /*background-color: black;*/
     color: white;
     padding: 0;
 }
@@ -16,6 +16,21 @@
 #sidebar #logo-section{
     height: 150px;
     padding: 10px;
+    /*background-color: #eb008c;*/
+}
+
+#sidebar #logo-section img{
+    width: 80px;
+    height: auto;
+    color: white;
+    font-family: 'Marck Script', cursive;
+}
+
+#sidebar #logo-section .cher{
+    font-family: 'Marck Script', cursive;
+    font-size: 26px;
+    position: relative;
+    left: -35px;
 }
 
 #sidebar nav ul{
@@ -61,4 +76,36 @@
 #content .content-header{
     height: 60px;
     background-color: #f0f0f0;
+    display: flex;
+}
+
+#content .sidebar-control{
+    min-width: 80px;
+    max-width: 60px;
+    border: 1px solid lightgrey;
+    line-height: 60px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#content .greeting{
+    flex: 1;
+    text-align: right;
+    margin-right: 40px;
+    line-height: 60px;
+}
+
+#content .greeting p{
+    margin-bottom: 0;
+    position: relative;
+    bottom: -5px
+}
+
+#content .logout{
+    min-width: 80px;
+    max-width: 60px;
+    border: 1px solid lightgrey;
+    line-height: 60px;
+    text-align: center;
+    cursor: pointer;
 }

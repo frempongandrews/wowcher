@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route, Link, NavLink } from "react-router-dom";
+import closeSideBarIcon from "./assets/toggle_btn_icon.png";
+import openSideBarIcon from "./assets/toggle_Collapse_btn_icon.png";
+import logoutIcon from "./assets/logout_icon.png";
+import logo from "./assets/wowcher-logo.png";
 import { connect } from "react-redux";
 import './App.css';
 import Dashboard from "./components/Dashboard";
@@ -25,7 +29,11 @@ class App extends Component {
                     {/*sidebar*/}
                     <aside id="sidebar" className="col-sm-3">
                         <div id="logo-section">
-                            logo
+                            <div>
+
+                                <img src={logo}/>
+                                <span className="cher">cher</span>
+                            </div>
                         </div>
 
                         <nav>
@@ -41,9 +49,24 @@ class App extends Component {
 
                     {/*content*/}
                     <div id="content" className="col-sm-9">
+
+                        {/*header*/}
                         <header className="content-header">
-                            header
+
+                            <div className="sidebar-control">
+                                <img src={closeSideBarIcon}/>
+                            </div>
+
+                            <div className="greeting">
+                                <p>Welcome, Mike</p>
+                            </div>
+
+                            <div className="logout">
+                                <img src={logoutIcon}/>
+                            </div>
+
                         </header>
+                        {/* /header*/}
 
                         <Switch>
                             <Route path={"/"} exact={true} render={(props) => <Dashboard {...props}/>}/>
