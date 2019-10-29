@@ -53,6 +53,19 @@
     position: relative;
 }
 
+#dashboard .resources-container .resource-item a{
+    /*display: inline-block;*/
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    color: #222222;
+}
+
 #dashboard .resources-container .resource-item .right-arrow{
     position: absolute;
     right: 10px;

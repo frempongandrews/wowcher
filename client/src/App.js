@@ -7,9 +7,12 @@ import logoutIcon from "./assets/logout_icon.png";
 import logo from "./assets/wowcher-logo.png";
 import { connect } from "react-redux";
 import './App.css';
-import Dashboard from "./components/Dashboard";
-import InProgress from "./components/InProgress";
+import Dashboard from "./pages/Dashboard";
+import InProgress from "./pages/InProgress";
 import {closeSidebar, openSidebar} from "./actions/appActions";
+import OrdersPage from "./pages/OrdersPage";
+import ProductsPage from "./pages/ProductsPage";
+import CustomersPage from "./pages/CustomersPage";
 
 class App extends Component {
 
@@ -48,6 +51,8 @@ class App extends Component {
                             </div>
                         </div>
 
+
+                        <p className="main-section-title">Main</p>
                         <nav>
                             <ul>
                                 <Link to={"/"}><li className={`${pathname ==="/" ? "active-section" : ""}`}>Dashboard</li></Link>
@@ -55,6 +60,20 @@ class App extends Component {
                                 <Link to={"/manage-users"}><li className={`${pathname ==="/manage-users" ? "active-section" : ""}`}>Manage Users</li></Link>
                             </ul>
                         </nav>
+
+
+                        <div className="divider"/>
+
+                        <p className="resources-section-title">Resources</p>
+
+                        <nav>
+                            <ul>
+                                <Link to={"/orders"}><li className={`${pathname ==="/orders" ? "active-section" : ""}`}>Orders</li></Link>
+                                <Link to={"/products"}><li className={`${pathname ==="/products" ? "active-section" : ""}`}>Products</li></Link>
+                                <Link to={"/customers"}><li className={`${pathname ==="/customers" ? "active-section" : ""}`}>Customers</li></Link>
+                            </ul>
+                        </nav>
+
 
                     </aside>
                     {/* /sidebar*/}
@@ -86,9 +105,17 @@ class App extends Component {
                         {/* /header*/}
 
                         <Switch>
+                            {/*main section*/}
                             <Route path={"/"} exact={true} render={(props) => <Dashboard {...props}/>}/>
                             <Route path={"/profile"} exact={true} render={(props) => <InProgress {...props}/>}/>
                             <Route path={"/manage-users"} exact={true} component={InProgress}/>
+                            {/* /main section*/}
+
+                            {/*resources section*/}
+                            <Route path={"/orders"} render={(props) => <OrdersPage {...props}/>}/>
+                            <Route path={"/products"} render={(props) => <ProductsPage {...props}/>}/>
+                            <Route path={"/customers"} render={(props) => <CustomersPage {...props}/>}/>
+                            {/* /resources section*/}
                         </Switch>
 
 

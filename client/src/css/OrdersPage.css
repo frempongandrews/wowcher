@@ -1,0 +1,94 @@
+#orders-page{
+    padding: 40px;
+    background-color: white;
+    min-height: 93vh;
+    animation: anim 1s ease 0ms 1;
+}
+
+@keyframes anim {
+    from {
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+#orders-page .page-header .title{
+    color: var(--main-pink-color);
+    margin-bottom: 20px;
+}
+
+#orders-page .search{
+    margin-bottom: 30px;
+}
+
+#orders-page .search input{
+    background-color: var(--light-gray-color);
+    width: 80%;
+    border: 0 solid lightgrey;
+    height: 35px;
+    border-radius: 5px;
+    padding-left: 20px;
+}
+
+#orders-page .search input::placeholder{
+    color: lightgray;
+    font-weight: bold;
+}
+
+#orders-page .search input:focus{
+    /*border: 1px solid var(--main-pink-color);*/
+    /*outline-color: var(--main-pink-color);*/
+    outline: none;
+    border: 1px solid var(--main-pink-color);
+}
+
+#orders-page #orders-table .nav{
+    display: flex;
+    border-bottom: 2px solid lightgray;
+}
+
+#orders-page #orders-table .nav li{
+    list-style: none;
+    padding: 15px 20px 15px 5px;
+    border-bottom: 3px solid var(--main-pink-color);
+    position: relative;
+    bottom: -2px;
+}
+
+#orders-page #orders-table .fields{
+    display: flex;
+    list-style: none;
+    margin-top: 30px;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 25px;
+}
+
+#orders-page #orders-table .fields li{
+    flex: 1;
+    text-align: center;
+}
+
+#orders-page #orders-table .fields li:first-child{
+    flex: 1;
+    text-align: left;
+}
+
+#orders-page #orders-table .table-row{
+    padding-top: 35px;
+    padding-bottom: 35px;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    list-style: none;
+}
+
+#orders-page #orders-table .table-row li{
+    flex: 1;
+    text-align: center;
+}
+
+#orders-page #orders-table .table-row li:first-child{
+    text-align: left;
+    color: var(--main-pink-color);
+}

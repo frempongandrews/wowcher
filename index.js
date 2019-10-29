@@ -5,6 +5,8 @@ const PORT = 3007;
 const users = require('./resources/users.json');
 const orders = require('./resources/orders.json');
 const products = require('./resources/products.json');
+const usersObj = require("./resources/usersObj");
+const productsObj = require("./resources/productsObj");
 
 console.log(process.env.NODE_ENV);
 
@@ -18,8 +20,18 @@ app.get("/orders", (req, res) => {
 
     const ordersCount = orders.length;
 
+    let ordersWithUserAndProduct = orders.map(order => {
+        let result = {};
+        result[order.orderId] = {
+            orderId: order.orderId,
+            user: usersObj[order.userId + ""],
+            product: productsObj[order.productId + ""]
+        };
+        return result;
+    });
+
   return res.json({
-      orders,
+      orders: ordersWithUserAndProduct,
       ordersCount
   })
 });
@@ -58,7 +70,7 @@ app.get('/orders/product/:product', (req, res) => {
     res.send({'numberOfOrders': orderAmount});
 });
 
-//get all customers and customer count
+//get all customers and customers count
 app.get('/users', (req, res) => {
   const results = require('./resources/users.json');
   userCount += results.length;

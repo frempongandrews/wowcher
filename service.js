@@ -108,7 +108,7 @@ const getMostPopularProduct = () => {
     let productsCopyStr = JSON.stringify(products);
     let productsCopy = JSON.parse(productsCopyStr);
     let orderCountPerProductObj = productsCopy.reduce((acc, currentValue, currentIndex, arr) => {
-        acc[currentValue.productName] = getOrderCountForProduct(currentValue.productName)
+        acc[currentValue.productName] = getOrderCountForProduct(currentValue.productName);
         return acc;
     }, {});
 
@@ -150,8 +150,7 @@ const getMostPopularProduct = () => {
 // getOrderCountForProduct("hammer");
 // getCustomerNamesForProduct("chair");
 // getOrderCountForProduct("chair");
-
-getMostPopularProduct();
+// getMostPopularProduct();
 
 module.exports = {
   getOrderCountForUser,

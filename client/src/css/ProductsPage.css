@@ -1,0 +1,15 @@
+#products-page{
+    padding: 40px;
+    background-color: white;
+    min-height: 93vh;
+    animation: anim 1s ease 0ms 1;
+}
+
+@keyframes anim {
+    from {
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
