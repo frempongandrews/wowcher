@@ -2,6 +2,16 @@
     /*background-color: #222222;*/
     min-height: 93vh;
     background-color: white;
+    animation: anim 1s ease 0ms 1;
+}
+
+@keyframes anim {
+    from {
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }
 
 #dashboard .preview-image-container{

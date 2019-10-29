@@ -28,6 +28,7 @@
     height: auto;
     color: white;
     font-family: 'Marck Script', cursive;
+
 }
 
 #sidebar #logo-section .cher{
@@ -86,6 +87,7 @@
     line-height: 60px;
     text-align: center;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 #content .greeting{

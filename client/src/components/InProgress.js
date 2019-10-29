@@ -13,7 +13,7 @@ class InProgress extends Component {
     render () {
 
         return (
-            <div id="in-progress">
+            <div id="in-progress" className="anim">
                 <div className="in-progress-inner-container">
 
                     {/*<p>{this.props.location.pathname.slice(1)} in progress (show nice image)</p>*/}
