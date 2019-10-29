@@ -96,6 +96,21 @@
     border-bottom: 1px solid lightgray;
     display: flex;
     list-style: none;
+    animation: slide 1s ease 0ms 1;
+}
+
+
+@keyframes slide {
+    from {
+        opacity: 0;
+        position: relative;
+        top: -20px;
+    }
+    to{
+        opacity: 1;
+        position: relative;
+        top: 0px;
+    }
 }
 
 #orders-page #orders-table .table-row li{

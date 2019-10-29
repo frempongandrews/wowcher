@@ -43,7 +43,7 @@ class App extends Component {
 
     render () {
 
-        const { isSidebarOpened, ordersCount, productsCount, customersCount, orders, products, customers } = this.props;
+        const { isSidebarOpened, ordersCount, productsCount, customersCount, orders, products, customers, sortOrder } = this.props;
         const { pathname } = this.props.location;
 
         let resourcesCountObj = {
@@ -54,6 +54,7 @@ class App extends Component {
 
         let ordersPageProps = {
             orders,
+            sortOrder,
             onSortOrders: this.onSortOrders
         };
 
@@ -161,6 +162,7 @@ const mapStateToProps = (state) => {
         customersCount: state.customers.customersCount,
         products: state.products.products,
         productsCount: state.products.productsCount,
+        sortOrder: state.orders.sortOrder
     }
 };
 
@@ -171,7 +173,8 @@ App.propTypes = {
     customers: PropTypes.array.isRequired,
     customersCount: PropTypes.number.isRequired,
     products: PropTypes.array.isRequired,
-    productsCount: PropTypes.number.isRequired
+    productsCount: PropTypes.number.isRequired,
+    sortOrder: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps)(App);

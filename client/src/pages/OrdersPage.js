@@ -7,7 +7,7 @@ class OrdersPage extends Component {
 
     render () {
 
-        const { orders, onSortOrders } = this.props;
+        const { orders, onSortOrders, sortOrder } = this.props;
 
         let ordersItems = orders.map(order => {
            return (
@@ -39,9 +39,21 @@ class OrdersPage extends Component {
                     <div className="fields">
                         <li>
                             <span>OrderId
-                                <i className="fa fa-caret-up" aria-hidden="true"
-                                   title="Sort By Id"
-                                   onClick={() => onSortOrders()}/>
+
+                                {
+                                    sortOrder === "ASC" &&
+                                    <i className="fa fa-caret-up" aria-hidden="true"
+                                       title="Sort By Id"
+                                       onClick={() => onSortOrders()}/>
+                                }
+
+                                {
+                                    sortOrder === "DSC" &&
+                                    <i className="fa fa-caret-down" aria-hidden="true"
+                                       title="Sort By Id"
+                                       onClick={() => onSortOrders()}/>
+                                }
+
                             </span>
                         </li>
                         <li>Customer</li>
