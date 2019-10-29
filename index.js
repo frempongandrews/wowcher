@@ -21,8 +21,7 @@ app.get("/orders", (req, res) => {
     const ordersCount = orders.length;
 
     let ordersWithUserAndProduct = orders.map(order => {
-        let result = {};
-        result[order.orderId] = {
+        let result = {
             orderId: order.orderId,
             user: usersObj[order.userId + ""],
             product: productsObj[order.productId + ""]

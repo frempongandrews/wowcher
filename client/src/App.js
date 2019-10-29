@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import closeSideBarIcon from "./assets/toggle_btn_icon.png";
-import openSideBarIcon from "./assets/toggle_Collapse_btn_icon.png";
+// import openSideBarIcon from "./assets/toggle_Collapse_btn_icon.png";
 import logoutIcon from "./assets/logout_icon.png";
 import logo from "./assets/wowcher-logo.png";
 import { connect } from "react-redux";
@@ -13,11 +13,17 @@ import {closeSidebar, openSidebar} from "./actions/appActions";
 import OrdersPage from "./pages/OrdersPage";
 import ProductsPage from "./pages/ProductsPage";
 import CustomersPage from "./pages/CustomersPage";
+import {fetchAllOrders} from "./actions/ordersActions";
+import {fetchAllProducts} from "./actions/productsActions";
+import {fetchAllCustomers} from "./actions/customersActions";
 
 class App extends Component {
 
     async componentDidMount () {
-
+        const { dispatch } = this.props;
+        await dispatch(fetchAllOrders());
+        await dispatch(fetchAllProducts());
+        await dispatch(fetchAllCustomers());
     }
 
     onCloseSidebar = () => {
@@ -30,10 +36,22 @@ class App extends Component {
         dispatch(openSidebar());
     };
 
+
+
     render () {
 
-        const { isSidebarOpened } = this.props;
+        const { isSidebarOpened, ordersCount, productsCount, customersCount, orders, products, customers } = this.props;
         const { pathname } = this.props.location;
+
+        let resourcesCountObj = {
+            ordersCount,
+            customersCount,
+            productsCount
+        };
+
+        let ordersPageProps = {
+            orders,
+        };
 
         return (
             <div id="App" className="container-fluid">
@@ -86,15 +104,14 @@ class App extends Component {
 
                             <div className="sidebar-control"
                                  onClick={isSidebarOpened ? this.onCloseSidebar : this.onOpenSidebar}
-                                 title={isSidebarOpened ? "Hide sidebar" : "Show sidebar"}
-                            >
+                                 title={isSidebarOpened ? "Hide sidebar" : "Show sidebar"}>
 
                                 <img src={closeSideBarIcon} alt="close sidebar icon" style={{transform: isSidebarOpened ? "rotate(0deg)" : "rotate(180deg)"}}/>
 
                             </div>
 
                             <div className="greeting">
-                                <p>Welcome, Mike</p>
+                                <p>Welcome, Andrews</p>
                             </div>
 
                             <div className="logout" title="Logout">
@@ -106,13 +123,13 @@ class App extends Component {
 
                         <Switch>
                             {/*main section*/}
-                            <Route path={"/"} exact={true} render={(props) => <Dashboard {...props}/>}/>
+                            <Route path={"/"} exact={true} render={(props) => <Dashboard {...props} {...resourcesCountObj}/>}/>
                             <Route path={"/profile"} exact={true} render={(props) => <InProgress {...props}/>}/>
                             <Route path={"/manage-users"} exact={true} component={InProgress}/>
                             {/* /main section*/}
 
                             {/*resources section*/}
-                            <Route path={"/orders"} render={(props) => <OrdersPage {...props}/>}/>
+                            <Route path={"/orders"} render={(props) => <OrdersPage {...props} {...ordersPageProps}/>}/>
                             <Route path={"/products"} render={(props) => <ProductsPage {...props}/>}/>
                             <Route path={"/customers"} render={(props) => <CustomersPage {...props}/>}/>
                             {/* /resources section*/}
@@ -130,14 +147,27 @@ class App extends Component {
     }
 }
 
+
 const mapStateToProps = (state) => {
     return {
-        isSidebarOpened: state.app.isSidebarOpened
+        isSidebarOpened: state.app.isSidebarOpened,
+        orders: state.orders.orders,
+        ordersCount: state.orders.ordersCount,
+        customers: state.customers.customers,
+        customersCount: state.customers.customersCount,
+        products: state.products.products,
+        productsCount: state.products.productsCount,
     }
 };
 
 App.propTypes = {
-    isSidebarOpened: PropTypes.bool.isRequired
+    isSidebarOpened: PropTypes.bool.isRequired,
+    orders: PropTypes.array.isRequired,
+    ordersCount: PropTypes.number.isRequired,
+    customers: PropTypes.array.isRequired,
+    customersCount: PropTypes.number.isRequired,
+    products: PropTypes.array.isRequired,
+    productsCount: PropTypes.number.isRequired
 };
 
 export default connect(mapStateToProps)(App);

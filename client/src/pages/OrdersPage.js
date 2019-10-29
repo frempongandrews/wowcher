@@ -6,6 +6,18 @@ class OrdersPage extends Component {
 
     render () {
 
+        const { orders } = this.props;
+
+        let ordersItems = orders.map(order => {
+           return (
+               <div className="table-row" key={order.orderId}>
+                   <li>{order.orderId}</li>
+                   <li>{order.user.name}</li>
+                   <li>{order.product.productName}</li>
+               </div>
+           )
+        });
+
         return (
             <div id="orders-page" className="anim">
                 <div className="page-header">
@@ -24,34 +36,14 @@ class OrdersPage extends Component {
                     </div>
 
                     <div className="fields">
-                        <li>OrderId</li>
+                        <li><span>OrderId</span> <i className="fa fa-caret-up" aria-hidden="true" /></li>
                         <li>Customer</li>
                         <li>Products</li>
                     </div>
 
-                    {/*order item*/}
-                    <div className="table-row">
-                        <li>test</li>
-                        <li>test</li>
-                        <li>test</li>
-                    </div>
-                    {/* /order item*/}
 
-                    {/*order item*/}
-                    <div className="table-row">
-                        <li>test</li>
-                        <li>test</li>
-                        <li>test</li>
-                    </div>
-                    {/* /order item*/}
+                    {ordersItems}
 
-                    {/*order item*/}
-                    <div className="table-row">
-                        <li>test</li>
-                        <li>test</li>
-                        <li>test</li>
-                    </div>
-                    {/* /order item*/}
 
                 </div>
 

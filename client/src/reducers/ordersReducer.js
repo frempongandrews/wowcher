@@ -3,6 +3,7 @@ import {FETCH_ORDERS_ERROR, FETCH_ORDERS_START, FETCH_ORDERS_SUCCESS} from "../a
 let initialState = {
     orders: [],
     ordersCount: 0,
+    sortOrder: "ASC",
     currentOrder : null,
 
     isFetchingOrders: false,
