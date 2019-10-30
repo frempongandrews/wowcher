@@ -1,10 +1,39 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import "../css/ProductsPage.css";
+import {fetchAllProducts} from "../actions/productsActions";
 
 
 class ProductsPage extends Component {
 
+    async componentDidMount () {
+        const { dispatch } = this.props;
+        await dispatch(fetchAllProducts());
+    }
+
     render () {
+
+        const { products } = this.props;
+
+        const productItems = products.map(product => {
+            return (
+                <div className="table-row" key={product.productId}>
+                    <li>{product.productId}</li>
+                    <li>{product.productName}</li>
+                    <li>
+                        {
+                            product.customers.map((c, i) => {
+                                return (
+                                    <span key={i}>{c}</span>
+                                )
+                            })
+                        }
+
+                    </li>
+                </div>
+            )
+        });
 
         return (
             <div id="products-page" className="anim">
@@ -42,13 +71,6 @@ class ProductsPage extends Component {
                                        onClick={null}/>
                                 }
 
-                                {/*{*/}
-                                    {/**/}
-                                    {/*<i className="fa fa-caret-down" aria-hidden="true"*/}
-                                       {/*title="Sort By Id"*/}
-                                       {/*onClick={null}/>*/}
-                                {/*}*/}
-
                             </span>
                         </li>
                         <li>ProductName</li>
@@ -56,14 +78,8 @@ class ProductsPage extends Component {
                     </div>
 
 
-                    {/*{ordersItems}*/}
 
-                    <div className="table-row" key={1}>
-                        <li>productId</li>
-                        <li>productName</li>
-                        <li>Customers</li>
-                    </div>
-
+                    {productItems}
 
                 </div>
             </div>
@@ -71,4 +87,14 @@ class ProductsPage extends Component {
     }
 }
 
-export default ProductsPage;
+const mapStateToProps = (state) => {
+    return {
+        products: state.products.products
+    }
+};
+
+ProductsPage.propTypes = {
+    products: PropTypes.array.isRequired
+};
+
+export default connect(mapStateToProps)(ProductsPage);

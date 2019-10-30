@@ -1,7 +1,11 @@
 import {
     FETCH_ORDERS_BY_CUSTOMER_ERROR,
-    FETCH_ORDERS_BY_CUSTOMER_START, FETCH_ORDERS_BY_CUSTOMER_SUCCESS,
-    FETCH_ORDERS_ERROR, FETCH_ORDERS_START, FETCH_ORDERS_SUCCESS, SEARCH_ORDER_BY_ID, SET_SORT_ORDERS_ORDER_BY_CUSTOMER,
+    FETCH_ORDERS_BY_CUSTOMER_START, FETCH_ORDERS_BY_CUSTOMER_SUCCESS, FETCH_ORDERS_BY_ONE_CUSTOMER_ERROR,
+    FETCH_ORDERS_BY_ONE_CUSTOMER_START,
+    FETCH_ORDERS_BY_ONE_CUSTOMER_SUCCESS,
+    FETCH_ORDERS_ERROR, FETCH_ORDERS_START, FETCH_ORDERS_SUCCESS, SEARCH_ORDER_BY_ID, SET_CURRENT_CUSTOMER_NAME,
+    SET_CURRENT_CUSTOMER_ORDERS,
+    SET_SORT_ORDERS_ORDER_BY_CUSTOMER,
     SHOW_ALL_ORDERS,
     SHOW_ORDERS_BY_CUSTOMER,
     SORT_ORDERS, SORT_ORDERS_BY_CUSTOMER
@@ -26,6 +30,13 @@ let initialState = {
     isFetchingOrders: false,
     isFinishedFetchingOrders: false,
     areOrdersFetched: false,
+
+    currentCustomerName: "",
+    currentCustomerOrders: null,
+
+    isFetchingOrdersByOneCustomer: false,
+    isFinishedFetchingOrdersByOneCustomer: false,
+    areOrdersByOneCustomerFetched: false,
 
     error: {},
     successMsg: ""
@@ -150,6 +161,57 @@ const ordersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ordersByCustomerSortOrder: action.order
+            };
+
+        case FETCH_ORDERS_BY_ONE_CUSTOMER_START:
+            return {
+                ...state,
+                isFetchingOrdersByOneCustomer: true,
+                isFinishedFetchingOrdersByOneCustomer: false,
+                areOrdersByOneCustomerFetched: false,
+            };
+
+        case FETCH_ORDERS_BY_ONE_CUSTOMER_SUCCESS:
+            return {
+                ...state,
+                isFetchingOrdersByOneCustomer: false,
+                isFinishedFetchingOrdersByOneCustomer: true,
+                areOrdersByOneCustomerFetched: true,
+                currentCustomerOrders: action.ordersCount
+            };
+
+        case FETCH_ORDERS_BY_ONE_CUSTOMER_ERROR:
+            return {
+                ...state,
+                isFetchingOrdersByOneCustomer: false,
+                isFinishedFetchingOrdersByOneCustomer: true,
+                areOrdersByOneCustomerFetched: false,
+            };
+
+        case SET_CURRENT_CUSTOMER_NAME:
+            if (!action.name) {
+                return {
+                    ...state,
+                    currentCustomerName: ""
+                }
+            }
+
+            return {
+                ...state,
+                currentCustomerName: action.name
+            };
+
+        case SET_CURRENT_CUSTOMER_ORDERS:
+            if (!action.value) {
+                return {
+                    ...state,
+                    currentCustomerOrders: null
+                };
+            }
+
+            return {
+                ...state,
+                currentCustomerOrders: action.value
             };
 
         default:

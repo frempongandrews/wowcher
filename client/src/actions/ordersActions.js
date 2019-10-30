@@ -12,6 +12,12 @@ export const FETCH_ORDERS_BY_CUSTOMER_SUCCESS = "FETCH_ORDERS_BY_CUSTOMER_SUCCES
 export const FETCH_ORDERS_BY_CUSTOMER_ERROR = "FETCH_ORDERS_BY_CUSTOMER_ERROR";
 export const SORT_ORDERS_BY_CUSTOMER = "SORT_ORDERS_BY_CUSTOMER";
 export const SET_SORT_ORDERS_ORDER_BY_CUSTOMER = "SET_SORT_ORDER_BY_CUSTOMER";
+export const FETCH_ORDERS_BY_ONE_CUSTOMER_START = "FETCH_ORDERS_BY_ONE_CUSTOMER_START";
+export const FETCH_ORDERS_BY_ONE_CUSTOMER_SUCCESS = "FETCH_ORDERS_BY_ONE_CUSTOMER_SUCCESS";
+export const FETCH_ORDERS_BY_ONE_CUSTOMER_ERROR = "FETCH_ORDERS_BY_ONE_CUSTOMER_ERROR";
+export const SET_CURRENT_CUSTOMER_NAME = "SET_CURRENT_CUSTOMER_NAME";
+export const SET_CURRENT_CUSTOMER_ORDERS = "SET_CURRENT_CUSTOMER_ORDERS";
+
 
 export const fetchAllOrders = () => {
     return (dispatch) => {
@@ -21,7 +27,7 @@ export const fetchAllOrders = () => {
 
         return axios.get("/orders")
             .then(res => {
-                console.log({res});
+                // console.log({res});
                 dispatch({
                     type: FETCH_ORDERS_SUCCESS,
                     data: res.data
@@ -82,6 +88,42 @@ export const fetchOrdersByCustomer = () => {
                 console.log(err.response);
                 dispatch({
                     type: FETCH_ORDERS_BY_CUSTOMER_ERROR,
+                })
+            })
+    }
+};
+
+export const setCurrentCustomerName = (name) => {
+    return {
+        type: SET_CURRENT_CUSTOMER_NAME,
+        name
+    }
+};
+
+export const setCurrentCustomerOrders = (value) => {
+    return {
+        type: SET_CURRENT_CUSTOMER_ORDERS,
+        value
+    }
+};
+
+export const fetchOrdersByOneCustomer = (customerName) => {
+    return (dispatch) => {
+        dispatch({
+            type: FETCH_ORDERS_BY_ONE_CUSTOMER_START
+        });
+        return axios.get(`/orders/user/${customerName}`)
+            .then(res => {
+                console.log({res});
+                dispatch({
+                    type: FETCH_ORDERS_BY_ONE_CUSTOMER_SUCCESS,
+                    ordersCount: res.data.ordersByCustomer
+                })
+            })
+            .catch(err => {
+                console.log(err.response);
+                dispatch({
+                    type: FETCH_ORDERS_BY_ONE_CUSTOMER_ERROR,
                 })
             })
     }

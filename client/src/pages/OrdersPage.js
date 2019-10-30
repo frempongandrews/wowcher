@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import "../css/OrdersPage.css";
 import OrdersByCustomerList from "../components/OrdersPage/OrdersByCustomerList";
 import {
-    searchOrderById, showAllOrders, showOrdersByCustomer, sortOrders,
+    fetchOrdersByOneCustomer,
+    searchOrderById, setCurrentCustomerName, setCurrentCustomerOrders, showAllOrders, showOrdersByCustomer, sortOrders,
     sortOrdersByCustomer
 } from "../actions/ordersActions";
 
@@ -16,14 +17,23 @@ class OrdersPage extends Component {
         errorMsg: ""
     };
 
-    showCustomerTotalOrders = (e) => {
+    showCustomerTotalOrders = async (e) => {
         // console.log(e.target.title);
         //set current customer name
-        alert(e.target.innerText);
+        const { dispatch } = this.props;
+        let selectedCustomerName = e.target.innerText;
+        await dispatch(setCurrentCustomerName(selectedCustomerName));
+        await dispatch(fetchOrdersByOneCustomer(selectedCustomerName));
+
+        //todo: optimise by caching call results in localStorage
+
     };
 
-    hideCustomerTotalOrders = () => {
+    hideCustomerTotalOrders = async () => {
         //set current customer name to null
+        const { dispatch } = this.props;
+        await dispatch(setCurrentCustomerName());
+        await dispatch(setCurrentCustomerOrders());
     };
 
     onChange = (e) => {
@@ -56,8 +66,8 @@ class OrdersPage extends Component {
 
         // console.log(this.state);
 
-        const { orders, ordersCount, ordersSortOrder, searchedOrders,
-            listToShow, ordersByCustomerSortOrder  } = this.props;
+        const { orders, ordersCount, ordersSortOrder, searchedOrders, listToShow, ordersByCustomerSortOrder,
+            currentCustomerOrders, currentCustomerName  } = this.props;
         let ordersItems = [];
         let searchedOrdersItems = [];
 
@@ -70,7 +80,7 @@ class OrdersPage extends Component {
                             <span
                                 onMouseEnter={this.showCustomerTotalOrders}
                                 onMouseLeave={this.hideCustomerTotalOrders}
-                                title={`${order.user.name}'s total orders: `}>{order.user.name}</span>
+                                title={`${currentCustomerName.trim().toLowerCase() === order.user.name.trim().toLowerCase() ? order.user.name + "'s total orders " + currentCustomerOrders : "" }`}>{order.user.name}</span>
                         </li>
                         <li>{order.product.productName}</li>
                     </div>
@@ -248,7 +258,9 @@ const mapStateToProps = (state) => {
         ordersSortOrder: state.orders.ordersSortOrder,
         searchedOrders: state.orders.searchedOrders,
         listToShow: state.orders.listToShow,
-        ordersByCustomerSortOrder: state.orders.ordersByCustomerSortOrder
+        ordersByCustomerSortOrder: state.orders.ordersByCustomerSortOrder,
+        currentCustomerName: state.orders.currentCustomerName,
+        currentCustomerOrders: state.orders.currentCustomerOrders
     }
 };
 
@@ -258,6 +270,7 @@ OrdersPage.propTypes = {
     ordersSortOrder: PropTypes.string.isRequired,
     searchedOrders: PropTypes.array.isRequired,
     listToShow: PropTypes.string.isRequired,
+
 
 };
 
