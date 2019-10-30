@@ -1,9 +1,10 @@
 import {
     FETCH_ORDERS_BY_CUSTOMER_ERROR,
     FETCH_ORDERS_BY_CUSTOMER_START, FETCH_ORDERS_BY_CUSTOMER_SUCCESS,
-    FETCH_ORDERS_ERROR, FETCH_ORDERS_START, FETCH_ORDERS_SUCCESS, SEARCH_ORDER_BY_ID, SHOW_ALL_ORDERS,
+    FETCH_ORDERS_ERROR, FETCH_ORDERS_START, FETCH_ORDERS_SUCCESS, SEARCH_ORDER_BY_ID, SET_SORT_ORDERS_ORDER_BY_CUSTOMER,
+    SHOW_ALL_ORDERS,
     SHOW_ORDERS_BY_CUSTOMER,
-    SORT_ORDERS
+    SORT_ORDERS, SORT_ORDERS_BY_CUSTOMER
 } from "../actions/ordersActions";
 
 
@@ -14,10 +15,11 @@ let listToShow = {
 
 let initialState = {
     orders: [],
-    searchedOrders: [],
-    ordersByCustomer: [],
     ordersCount: 0,
     ordersSortOrder: "ASC",
+    searchedOrders: [],
+    ordersByCustomer: [],
+    ordersByCustomerSortOrder: "ASC",
     listToShow: listToShow.allOrders,
     currentOrder : null,
 
@@ -124,6 +126,30 @@ const ordersReducer = (state = initialState, action) => {
                 isFetchingOrders: false,
                 isFinishedFetchingOrders: true,
                 areOrdersFetched: false
+            };
+
+        case SORT_ORDERS_BY_CUSTOMER:
+            if (state.ordersByCustomerSortOrder === "ASC") {
+                return {
+                    ...state,
+                    ordersByCustomerSortOrder: "DSC",
+                    ordersByCustomer: [...state.ordersByCustomer].reverse()
+                }
+            }
+
+            if (state.ordersByCustomerSortOrder === "DSC") {
+                return {
+                    ...state,
+                    ordersByCustomerSortOrder: "ASC",
+                    ordersByCustomer: [...state.ordersByCustomer].reverse()
+                }
+            }
+            break;
+
+        case SET_SORT_ORDERS_ORDER_BY_CUSTOMER:
+            return {
+                ...state,
+                ordersByCustomerSortOrder: action.order
             };
 
         default:

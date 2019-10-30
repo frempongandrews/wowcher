@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../css/OrdersPage.css";
 import OrdersByCustomerList from "../components/OrdersPage/OrdersByCustomerList";
-import {searchOrderById, showAllOrders, showOrdersByCustomer, sortOrders} from "../actions/ordersActions";
+import {
+    searchOrderById, showAllOrders, showOrdersByCustomer, sortOrders,
+    sortOrdersByCustomer
+} from "../actions/ordersActions";
 
 
 class OrdersPage extends Component {
@@ -44,7 +47,7 @@ class OrdersPage extends Component {
         // console.log(this.state);
 
         const { orders, ordersCount, ordersSortOrder, searchedOrders,
-            listToShow,  } = this.props;
+            listToShow, ordersByCustomerSortOrder  } = this.props;
         let ordersItems = [];
         let searchedOrdersItems = [];
 
@@ -148,9 +151,20 @@ class OrdersPage extends Component {
                             <div className="table-row orders-by-customer-table-row">
                                 <li>
                                     <span>Num of orders
-                                        <i className="fa fa-caret-up" aria-hidden="true"
-                                           title="Sort by number of orders"
-                                           onClick={null}/>
+                                        {
+                                            ordersByCustomerSortOrder === "ASC" &&
+                                            <i className="fa fa-caret-up" aria-hidden="true"
+                                               title="Sort by number of orders"
+                                               onClick={() => this.props.dispatch(sortOrdersByCustomer())}/>
+                                        }
+
+                                        {
+                                            ordersByCustomerSortOrder === "DSC" &&
+                                            <i className="fa fa-caret-down" aria-hidden="true"
+                                               title="Sort by number of orders"
+                                               onClick={() => this.props.dispatch(sortOrdersByCustomer())}/>
+                                        }
+
                                     </span>
                                 </li>
 
@@ -163,6 +177,8 @@ class OrdersPage extends Component {
 
 
                     {/*content*/}
+
+                    {/*all orders*/}
                     {
                         listToShow === "ALL_ORDERS" &&
                         <div>
@@ -185,12 +201,14 @@ class OrdersPage extends Component {
 
                         </div>
                     }
+                    {/* /all orders*/}
 
-
+                    {/*orders by customer*/}
                     {
                         listToShow === "ORDERS_BY_CUSTOMER" &&
                         <OrdersByCustomerList/>
                     }
+                    {/* /orders by customer*/}
 
                     {/* /content*/}
 
@@ -198,8 +216,6 @@ class OrdersPage extends Component {
 
                 </div>
                 {/*orders-table*/}
-
-
 
             </div>
         )
@@ -216,7 +232,8 @@ const mapStateToProps = (state) => {
         productsCount: state.products.productsCount,
         ordersSortOrder: state.orders.ordersSortOrder,
         searchedOrders: state.orders.searchedOrders,
-        listToShow: state.orders.listToShow
+        listToShow: state.orders.listToShow,
+        ordersByCustomerSortOrder: state.orders.ordersByCustomerSortOrder
     }
 };
 

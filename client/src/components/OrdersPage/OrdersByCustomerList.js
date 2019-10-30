@@ -1,14 +1,16 @@
 import React, { Component } from "react";
+import "../../css/OrdersByCustomerList.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import {fetchOrdersByCustomer} from "../../actions/ordersActions";
+import {fetchOrdersByCustomer, setSortOrdersOrderByCustomer} from "../../actions/ordersActions";
 
 class OrdersByCustomerList extends Component{
 
-    componentDidMount() {
+    async componentDidMount() {
         // alert("mounted");
         const { dispatch } = this.props;
-        dispatch(fetchOrdersByCustomer());
+        await dispatch(setSortOrdersOrderByCustomer("ASC"));
+        await dispatch(fetchOrdersByCustomer());
     }
     render () {
 
@@ -16,7 +18,7 @@ class OrdersByCustomerList extends Component{
 
         const ordersByCustomerItems = ordersByCustomer.map((orderNumAndCustomer, i) => {
             return (
-                <div className="table-row" key={i}>
+                <div className="table-row table-row-orders-by-customer" key={i}>
                     <li>{orderNumAndCustomer.orderCount}</li>
 
                     <li>{orderNumAndCustomer.customerName}</li>
@@ -25,7 +27,7 @@ class OrdersByCustomerList extends Component{
         });
 
         return (
-            <div>
+            <div id="orders-by-customer-list">
 
                 {ordersByCustomerItems}
 

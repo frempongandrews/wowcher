@@ -10,8 +10,8 @@ export const SHOW_ALL_ORDERS = "SHOW_ALL_ORDERS";
 export const FETCH_ORDERS_BY_CUSTOMER_START = "FETCH_ORDERS_BY_CUSTOMER_START";
 export const FETCH_ORDERS_BY_CUSTOMER_SUCCESS = "FETCH_ORDERS_BY_CUSTOMER_SUCCESS";
 export const FETCH_ORDERS_BY_CUSTOMER_ERROR = "FETCH_ORDERS_BY_CUSTOMER_ERROR";
-
-
+export const SORT_ORDERS_BY_CUSTOMER = "SORT_ORDERS_BY_CUSTOMER";
+export const SET_SORT_ORDERS_ORDER_BY_CUSTOMER = "SET_SORT_ORDER_BY_CUSTOMER";
 
 export const fetchAllOrders = () => {
     return (dispatch) => {
@@ -72,18 +72,30 @@ export const fetchOrdersByCustomer = () => {
 
         return axios.get("/orders/by-user")
             .then(res => {
-                console.log("***********");
-                console.log({res});
-                const orders = res.data.orders
+                const { orders } = res.data;
                 dispatch({
                     type: FETCH_ORDERS_BY_CUSTOMER_SUCCESS,
                     orders
                 })
             })
             .catch(err => {
+                console.log(err.response);
                 dispatch({
-                    type: FETCH_ORDERS_BY_CUSTOMER_SUCCESS,
+                    type: FETCH_ORDERS_BY_CUSTOMER_ERROR,
                 })
             })
+    }
+};
+
+export const sortOrdersByCustomer = () => {
+    return {
+        type: SORT_ORDERS_BY_CUSTOMER
+    }
+};
+
+export const setSortOrdersOrderByCustomer = (order) => {
+    return {
+        type: SET_SORT_ORDERS_ORDER_BY_CUSTOMER,
+        order
     }
 };

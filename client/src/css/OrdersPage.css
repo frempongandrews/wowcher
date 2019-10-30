@@ -125,7 +125,7 @@
     cursor: pointer;
 }
 
-#orders-page #orders-table .table-row{
+#orders-table .table-row{
     padding-top: 35px;
     padding-bottom: 35px;
     border-bottom: 1px solid lightgray;
