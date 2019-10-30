@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../css/OrdersPage.css";
 import OrdersByCustomerList from "../components/OrdersPage/OrdersByCustomerList";
+import {searchOrderById, showAllOrders, showOrdersByCustomer, sortOrders} from "../actions/ordersActions";
 
 
 class OrdersPage extends Component {
@@ -23,7 +25,7 @@ class OrdersPage extends Component {
                     searchText: Number(e.target.value),
                     errorMsg: ""
                 }, () => {
-                    this.props.onSearchOrderById(this.state.searchText);
+                    this.props.dispatch(searchOrderById(this.state.searchText));
                 })
             }
 
@@ -41,8 +43,8 @@ class OrdersPage extends Component {
 
         // console.log(this.state);
 
-        const { orders, ordersCount, onSortOrders, ordersSortOrder, searchedOrders, onShowOrdersByCustomer,
-            listToShow, onShowAllOrders } = this.props;
+        const { orders, ordersCount, ordersSortOrder, searchedOrders,
+            listToShow,  } = this.props;
         let ordersItems = [];
         let searchedOrdersItems = [];
 
@@ -97,12 +99,12 @@ class OrdersPage extends Component {
                     <div className="nav">
                         <li
                             className={`${listToShow === "ALL_ORDERS" ? "active-nav-item" : ""}`}
-                            onClick={() => onShowAllOrders()}>
+                            onClick={() => this.props.dispatch(showAllOrders())}>
                             All orders <span className="count">{ordersCount}</span>
                         </li>
                         <li
                             className={`${listToShow === "ORDERS_BY_CUSTOMER" ? "active-nav-item" : ""}`}
-                            onClick={() => onShowOrdersByCustomer()}>
+                            onClick={() => this.props.dispatch(showOrdersByCustomer())}>
                             Orders by customer</li>
                     </div>
 
@@ -121,14 +123,14 @@ class OrdersPage extends Component {
                                             ordersSortOrder === "ASC" &&
                                             <i className="fa fa-caret-up" aria-hidden="true"
                                                title="Sort by id"
-                                               onClick={() => onSortOrders()}/>
+                                               onClick={() => this.props.dispatch(sortOrders())}/>
                                         }
 
                                         {
                                             ordersSortOrder === "DSC" &&
                                             <i className="fa fa-caret-down" aria-hidden="true"
                                                title="Sort By Id"
-                                               onClick={() => onSortOrders()}/>
+                                               onClick={() => this.props.dispatch(sortOrders())}/>
                                         }
 
                                     </span>
@@ -204,15 +206,27 @@ class OrdersPage extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        orders: state.orders.orders,
+        ordersCount: state.orders.ordersCount,
+        customers: state.customers.customers,
+        customersCount: state.customers.customersCount,
+        products: state.products.products,
+        productsCount: state.products.productsCount,
+        ordersSortOrder: state.orders.ordersSortOrder,
+        searchedOrders: state.orders.searchedOrders,
+        listToShow: state.orders.listToShow
+    }
+};
+
 OrdersPage.propTypes = {
     orders: PropTypes.array.isRequired,
     ordersCount: PropTypes.number.isRequired,
-    onSortOrders: PropTypes.func.isRequired,
     ordersSortOrder: PropTypes.string.isRequired,
     searchedOrders: PropTypes.array.isRequired,
-    onShowOrdersByCustomer: PropTypes.func.isRequired,
     listToShow: PropTypes.string.isRequired,
-    onShowAllOrders: PropTypes.func.isRequired
+
 };
 
-export default OrdersPage;
+export default connect(mapStateToProps)(OrdersPage);

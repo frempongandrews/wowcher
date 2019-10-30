@@ -39,34 +39,9 @@ class App extends Component {
         dispatch(openSidebar());
     };
 
-    onSortOrders = () => {
-        const { dispatch } = this.props;
-        dispatch(sortOrders());
-    };
-
-
-    /*orders page*/
-
-    onSearchOrderById = (orderId) => {
-        const { dispatch } = this.props;
-        dispatch(searchOrderById(orderId));
-    };
-
-    onShowAllOrders = () => {
-        const { dispatch } = this.props;
-        dispatch(showAllOrders());
-    };
-
-    onShowOrdersByCustomer = () => {
-        const { dispatch } = this.props;
-        dispatch(showOrdersByCustomer());
-    };
-
-    /* /orders page*/
-
     render () {
 
-        const { isSidebarOpened, ordersCount, productsCount, customersCount, orders, products, customers, ordersSortOrder, searchedOrders, listToShow } = this.props;
+        const { isSidebarOpened, ordersCount, productsCount, customersCount } = this.props;
         const { pathname } = this.props.location;
 
         let resourcesCountObj = {
@@ -75,21 +50,7 @@ class App extends Component {
             productsCount
         };
 
-        let ordersPageProps = {
-            orders,
-            ordersCount,
-            searchedOrders,
-            ordersSortOrder,
-            onSortOrders: this.onSortOrders,
-            onSearchOrderById: this.onSearchOrderById,
-            onShowOrdersByCustomer: this.onShowOrdersByCustomer,
-            onShowAllOrders: this.onShowAllOrders,
-            listToShow
-        };
 
-        let productsPageProps = {
-            products,
-        };
 
         return (
             <div id="App" className="container-fluid">
@@ -167,8 +128,8 @@ class App extends Component {
                             {/* /main section*/}
 
                             {/*resources section*/}
-                            <Route path={"/orders"} render={(props) => <OrdersPage {...props} {...ordersPageProps}/>}/>
-                            <Route path={"/products"} render={(props) => <ProductsPage {...props} {...productsPageProps}/>}/>
+                            <Route path={"/orders"} render={(props) => <OrdersPage {...props}/>}/>
+                            <Route path={"/products"} render={(props) => <ProductsPage {...props}/>}/>
                             <Route path={"/customers"} render={(props) => <CustomersPage {...props}/>}/>
                             {/* /resources section*/}
                         </Switch>
@@ -189,29 +150,18 @@ class App extends Component {
 const mapStateToProps = (state) => {
     return {
         isSidebarOpened: state.app.isSidebarOpened,
-        orders: state.orders.orders,
         ordersCount: state.orders.ordersCount,
-        customers: state.customers.customers,
         customersCount: state.customers.customersCount,
-        products: state.products.products,
-        productsCount: state.products.productsCount,
-        ordersSortOrder: state.orders.ordersSortOrder,
-        searchedOrders: state.orders.searchedOrders,
-        listToShow: state.orders.listToShow
+        productsCount: state.products.productsCount
     }
 };
 
 App.propTypes = {
     isSidebarOpened: PropTypes.bool.isRequired,
-    orders: PropTypes.array.isRequired,
-    searchedOrders: PropTypes.array.isRequired,
     ordersCount: PropTypes.number.isRequired,
-    customers: PropTypes.array.isRequired,
     customersCount: PropTypes.number.isRequired,
-    products: PropTypes.array.isRequired,
     productsCount: PropTypes.number.isRequired,
-    ordersSortOrder: PropTypes.string.isRequired,
-    listToShow: PropTypes.string.isRequired
+
 };
 
 export default connect(mapStateToProps)(App);
