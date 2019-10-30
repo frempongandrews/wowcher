@@ -108,21 +108,21 @@ app.get("/users", (req, res) => {
 
 //***************End Added endpoints ***************
 
-//number of orders by a customer
+//number of orders by a customer todo: DONE
 app.get('/orders/user/:name', (req, res) => {
     const userName = req.params.name;
     const orderAmount = service.getOrderCountForUser(userName);
     res.send({'ordersByCustomer': orderAmount});
 });
 
-//get number of orders by product
+//get number of orders by product todo
 app.get('/orders/product/:product', (req, res) => {
     const productName = req.params.product;
     const orderAmount = service.getOrderCountForProduct(productName);
     res.send({'numberOfOrders': orderAmount});
 });
 
-//get all customers and customers count
+//get all customers and customers count todo
 app.get('/users', (req, res) => {
   const results = require('./resources/users.json');
   userCount += results.length;
@@ -130,7 +130,7 @@ app.get('/users', (req, res) => {
   res.send(payload)
 });
 
-//customers who've ordered a product
+//customers who've ordered a product todo
 app.get('/users/product/:product', (req, res) => {
   const productName = req.params.product;
   const customers = service.getCustomerNamesForProduct({'customerOrdered': productName});

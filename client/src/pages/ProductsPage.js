@@ -21,11 +21,12 @@ class ProductsPage extends Component {
                 <div className="table-row" key={product.productId}>
                     <li>{product.productId}</li>
                     <li>{product.productName}</li>
+                    <li>{product.orderCount}</li>
                     <li>
                         {
                             product.customers.map((c, i) => {
                                 return (
-                                    <span key={i}>{c}</span>
+                                    <p key={i}>{c}</p>
                                 )
                             })
                         }
@@ -74,7 +75,8 @@ class ProductsPage extends Component {
                             </span>
                         </li>
                         <li>ProductName</li>
-                        <li>Customers</li>
+                        <li>Num times ordered</li>
+                        <li>Ordered by</li>
                     </div>
 
 
