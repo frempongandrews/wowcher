@@ -80,7 +80,7 @@ class OrdersPage extends Component {
                             <span
                                 onMouseEnter={this.showCustomerTotalOrders}
                                 onMouseLeave={this.hideCustomerTotalOrders}
-                                title={`${currentCustomerName.trim().toLowerCase() === order.user.name.trim().toLowerCase() ? order.user.name + "'s total orders " + currentCustomerOrders : "" }`}>{order.user.name}</span>
+                                title={`${currentCustomerName.trim().toLowerCase() === order.user.name.trim().toLowerCase() && currentCustomerOrders !== null ? order.user.name + "'s total orders " + currentCustomerOrders : "" }`}>{order.user.name}</span>
                         </li>
                         <li>{order.product.productName}</li>
                     </div>
