@@ -29,7 +29,7 @@ class OrdersPage extends Component {
             //if it's NOT a number
             if (isNaN(Number(e.target.value))) {
                 this.setState({
-                    errorMsg: "Please insert a valid order number"
+                    errorMsg: "Please insert a valid order id"
                 })
             }
 
@@ -40,7 +40,7 @@ class OrdersPage extends Component {
 
         console.log(this.state);
 
-        const { orders, onSortOrders, sortOrder, searchedOrders } = this.props;
+        const { orders, onSortOrders, ordersSortOrder, searchedOrders } = this.props;
         let ordersItems = [];
         let searchedOrdersItems = [];
 
@@ -79,7 +79,7 @@ class OrdersPage extends Component {
 
                 <div className="search">
                     <div>
-                        <input placeholder="Search order number" name="orderNumber" onChange={this.onChange}/>
+                        <input placeholder="Search order id" name="orderNumber" onChange={this.onChange}/>
                         <span><i className="fa fa-search" aria-hidden="true" /></span>
                     </div>
                     {
@@ -101,14 +101,14 @@ class OrdersPage extends Component {
                             <span>OrderId
 
                                 {
-                                    sortOrder === "ASC" &&
+                                    ordersSortOrder === "ASC" &&
                                     <i className="fa fa-caret-up" aria-hidden="true"
                                        title="Sort By Id"
                                        onClick={() => onSortOrders()}/>
                                 }
 
                                 {
-                                    sortOrder === "DSC" &&
+                                    ordersSortOrder === "DSC" &&
                                     <i className="fa fa-caret-down" aria-hidden="true"
                                        title="Sort By Id"
                                        onClick={() => onSortOrders()}/>
@@ -130,7 +130,7 @@ class OrdersPage extends Component {
                         (typeof this.state.searchText === "number") &&
                         this.state.searchText !== 0 &&
                         searchedOrdersItems.length === 0 &&
-                        <p>No order found</p>
+                        <p className="no-order-found">No order found</p>
                     }
 
 

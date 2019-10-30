@@ -13,3 +13,168 @@
         opacity: 1;
     }
 }
+
+#products-page .page-header{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#products-page .page-header button{
+    background-color: var(--main-pink-color);
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+#products-page .page-header button:focus{
+    outline: none;
+}
+
+#products-page .page-header .title{
+    color: var(--main-pink-color);
+    margin-bottom: 0px;
+    flex: 1;
+}
+
+#products-page .search{
+    margin-bottom: 30px;
+}
+
+#products-page .search input{
+    background-color: var(--light-gray-color);
+    width: 100%;
+    border: 0 solid lightgrey;
+    height: 35px;
+    border-radius: 5px;
+    padding-left: 20px;
+}
+
+#products-page .search input::placeholder{
+    color: lightgray;
+    font-weight: bold;
+}
+
+#products-page .search input:focus{
+    /*border: 1px solid var(--main-pink-color);*/
+    /*outline-color: var(--main-pink-color);*/
+    outline: none;
+    border: 1px solid var(--main-pink-color);
+}
+
+#products-page .search > div{
+    position: relative;
+    /*background-color: red;*/
+    /*same width as input*/
+    width: 80%;
+}
+
+#products-page .search > div span{
+    position: absolute;
+    /*display: inline-block;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 33px;
+    width: 35px;
+    background-color: var(--main-pink-color);
+    right: 1px;
+    top: 1px;
+    border-radius: 5px;
+}
+
+#products-page .search label{
+    color: darkred;
+    font-size: 12px;
+    animation: slide 1s ease 0ms 1;
+}
+
+#products-page .search > div span i{
+    color: white;
+}
+
+#products-page #orders-table .nav{
+    display: flex;
+    border-bottom: 2px solid lightgray;
+}
+
+#products-page #orders-table .nav li{
+    list-style: none;
+    padding: 15px 20px 15px 5px;
+    position: relative;
+    bottom: -2px;
+    cursor: pointer;
+}
+
+#products-page #orders-table .nav li:first-child{
+    margin-right: 20px;
+    border-bottom: 3px solid var(--main-pink-color);
+}
+
+#products-page #orders-table .fields{
+    display: flex;
+    list-style: none;
+    margin-top: 30px;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 25px;
+}
+
+#products-page #orders-table .fields li{
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+}
+
+#products-page #orders-table .fields li:first-child{
+    flex: 1;
+    text-align: left;
+
+}
+
+#products-page #orders-table .fields li:first-child span{
+    position: relative;
+}
+
+#products-page #orders-table .fields li:first-child i{
+    color: var(--main-pink-color);
+    font-size: 30px;
+    position: absolute;
+    right: -25px;
+    top: -8px;
+    cursor: pointer;
+}
+
+#products-page #orders-table .table-row{
+    padding-top: 35px;
+    padding-bottom: 35px;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    list-style: none;
+    animation: slide 1s ease 0ms 1;
+}
+
+
+@keyframes slide {
+    from {
+        opacity: 0;
+        position: relative;
+        top: -20px;
+    }
+    to{
+        opacity: 1;
+        position: relative;
+        top: 0px;
+    }
+}
+
+#products-page #orders-table .table-row li{
+    flex: 1;
+    text-align: center;
+}
+
+#products-page #orders-table .table-row li:first-child{
+    text-align: left;
+    color: var(--main-pink-color);
+}

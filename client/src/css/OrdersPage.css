@@ -153,3 +153,7 @@
     text-align: left;
     color: var(--main-pink-color);
 }
+
+#orders-page .no-order-found{
+    margin-top: 30px;
+}

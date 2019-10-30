@@ -48,7 +48,7 @@ class App extends Component {
 
     render () {
 
-        const { isSidebarOpened, ordersCount, productsCount, customersCount, orders, products, customers, sortOrder, searchedOrders } = this.props;
+        const { isSidebarOpened, ordersCount, productsCount, customersCount, orders, products, customers, ordersSortOrder, searchedOrders } = this.props;
         const { pathname } = this.props.location;
 
         let resourcesCountObj = {
@@ -60,9 +60,13 @@ class App extends Component {
         let ordersPageProps = {
             orders,
             searchedOrders,
-            sortOrder,
+            ordersSortOrder,
             onSortOrders: this.onSortOrders,
             onSearchOrderById: this.onSearchOrderById
+        };
+
+        let productsPageProps = {
+            products,
         };
 
         return (
@@ -142,7 +146,7 @@ class App extends Component {
 
                             {/*resources section*/}
                             <Route path={"/orders"} render={(props) => <OrdersPage {...props} {...ordersPageProps}/>}/>
-                            <Route path={"/products"} render={(props) => <ProductsPage {...props}/>}/>
+                            <Route path={"/products"} render={(props) => <ProductsPage {...props} {...productsPageProps}/>}/>
                             <Route path={"/customers"} render={(props) => <CustomersPage {...props}/>}/>
                             {/* /resources section*/}
                         </Switch>
@@ -169,7 +173,7 @@ const mapStateToProps = (state) => {
         customersCount: state.customers.customersCount,
         products: state.products.products,
         productsCount: state.products.productsCount,
-        sortOrder: state.orders.sortOrder,
+        ordersSortOrder: state.orders.ordersSortOrder,
         searchedOrders: state.orders.searchedOrders
     }
 };
@@ -183,7 +187,7 @@ App.propTypes = {
     customersCount: PropTypes.number.isRequired,
     products: PropTypes.array.isRequired,
     productsCount: PropTypes.number.isRequired,
-    sortOrder: PropTypes.string.isRequired
+    ordersSortOrder: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps)(App);

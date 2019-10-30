@@ -7,7 +7,7 @@ let initialState = {
     orders: [],
     searchedOrders: [],
     ordersCount: 0,
-    sortOrder: "ASC",
+    ordersSortOrder: "ASC",
     currentOrder : null,
 
     isFetchingOrders: false,
@@ -51,18 +51,18 @@ const ordersReducer = (state = initialState, action) => {
             };
 
         case SORT_ORDERS:
-            if (state.sortOrder === "ASC") {
+            if (state.ordersSortOrder === "ASC") {
                 return {
                     ...state,
-                    sortOrder: "DSC",
+                    ordersSortOrder: "DSC",
                     orders: [...state.orders].reverse()
                 }
             }
 
-            if (state.sortOrder === "DSC") {
+            if (state.ordersSortOrder === "DSC") {
                 return {
                     ...state,
-                    sortOrder: "ASC",
+                    ordersSortOrder: "ASC",
                     orders: [...state.orders].reverse()
                 }
             }
