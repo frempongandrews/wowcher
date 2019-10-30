@@ -8,6 +8,14 @@ describe('service', function() {
       assert.equal(subject.getOrderCountForUser('sam'), 3, 'number of users incorrect')
     });
 
+    it('should return 3 orders for Sam', () => {
+        assert.equal(subject.getOrderCountForUser('Sam'), 3, 'number of users incorrect')
+    });
+
+    it("should return 3 orders for ' Sam '", () => {
+        assert.equal(subject.getOrderCountForUser(' Sam '), 3, 'number of users incorrect')
+    });
+
     it('should return 3 orders for bob', () => {
         assert.equal(subject.getOrderCountForUser('bob'), 3, 'number of users incorrect')
     });

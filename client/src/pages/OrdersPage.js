@@ -15,8 +15,19 @@ class OrdersPage extends Component {
         searchText: "",
         errorMsg: ""
     };
+
+    showCustomerTotalOrders = (e) => {
+        // console.log(e.target.title);
+        //set current customer name
+        alert(e.target.innerText);
+    };
+
+    hideCustomerTotalOrders = () => {
+        //set current customer name to null
+    };
+
     onChange = (e) => {
-        if (e.target.name = "orderNumber") {
+        if (e.target.name === "orderNumber") {
 
             if (e.target.value === 0) {
                 return;
@@ -38,7 +49,6 @@ class OrdersPage extends Component {
                     errorMsg: "Please insert a valid order id"
                 })
             }
-
         }
     };
 
@@ -56,7 +66,12 @@ class OrdersPage extends Component {
                 return (
                     <div className="table-row" key={order.orderId}>
                         <li>{order.orderId}</li>
-                        <li>{order.user.name}</li>
+                        <li className="customer-name">
+                            <span
+                                onMouseEnter={this.showCustomerTotalOrders}
+                                onMouseLeave={this.hideCustomerTotalOrders}
+                                title={`${order.user.name}'s total orders: `}>{order.user.name}</span>
+                        </li>
                         <li>{order.product.productName}</li>
                     </div>
                 )
@@ -138,7 +153,7 @@ class OrdersPage extends Component {
 
                                     </span>
                                 </li>
-                                <li>Customer</li>
+                                <li>Customer Name</li>
                                 <li>Products</li>
                             </div>
                         }

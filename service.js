@@ -9,7 +9,7 @@ const getOrderCountForUser = (name) => {
 
   let orderCount = 0;
   for (user of users) {
-    if (user.name === name) {
+    if (user.name.trim().toLowerCase() === name.trim().toLowerCase()) {
       const userId = user.userId;
       for (order of orders) {
         if (order.userId === userId) {
@@ -26,7 +26,7 @@ const getOrderCountForProduct = function(productName) {
   // return 2
     let orderCount = 0;
     for (product of products) {
-      if (productName === product.productName) {
+      if (productName.trim().toLowerCase() === product.productName.trim().toLowerCase()) {
         let productId = product.productId;
         for (order of orders) {
           if (order.productId === productId) {
@@ -45,7 +45,7 @@ const getCustomerNamesForProduct = (productName) => {
     //get productId
     let productId;
     for (product of products) {
-      if (productName === product.productName) {
+      if (productName.trim().toLowerCase() === product.productName.trim().toLowerCase()) {
         productId = product.productId;
       }
     }
@@ -57,10 +57,7 @@ const getCustomerNamesForProduct = (productName) => {
       return [];
     }
 
-    let productAndCustomersNamesObj = {
-        //id: { customersNames: []
-                  //}
-    };
+    let productAndCustomersNamesObj = {};
 
     let customersNamesByIdObj = {};
     users.forEach(user => {
@@ -97,14 +94,14 @@ const getCustomerNamesForProduct = (productName) => {
       return arr.indexOf(customer) === i
     }).sort();
 
-    console.log(uniqueCustomersNamesForProduct);
+    // console.log(uniqueCustomersNamesForProduct);
     return uniqueCustomersNamesForProduct;
 
 };
 
 //another endpoint
 const getMostPopularProduct = () => {
-  // return ['chair']
+
     //get order count per product
     //deep clone
     let productsCopyStr = JSON.stringify(products);

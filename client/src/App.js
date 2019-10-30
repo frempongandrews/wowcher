@@ -14,8 +14,7 @@ import OrdersPage from "./pages/OrdersPage";
 import ProductsPage from "./pages/ProductsPage";
 import CustomersPage from "./pages/CustomersPage";
 import {
-    fetchAllOrders, searchOrderById, showAllOrders, showOrdersByCustomer,
-    sortOrders
+    fetchAllOrders
 } from "./actions/ordersActions";
 import {fetchAllProducts} from "./actions/productsActions";
 import {fetchAllCustomers} from "./actions/customersActions";

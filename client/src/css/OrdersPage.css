@@ -162,6 +162,11 @@
     text-align: center;
 }
 
+#orders-page #orders-table .table-row li.customer-name span{
+    border-bottom: 1px dotted black;
+    cursor: pointer;
+}
+
 #orders-page #orders-table .table-row li:first-child{
     text-align: left;
     color: var(--main-pink-color);
