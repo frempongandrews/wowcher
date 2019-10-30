@@ -68,6 +68,7 @@
 #orders-page .search label{
     color: darkred;
     font-size: 12px;
+    animation: slide 1s ease 0ms 1;
 }
 
 #orders-page .search > div span i{

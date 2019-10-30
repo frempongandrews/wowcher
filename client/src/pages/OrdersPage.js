@@ -82,7 +82,11 @@ class OrdersPage extends Component {
                         <input placeholder="Search order number" name="orderNumber" onChange={this.onChange}/>
                         <span><i className="fa fa-search" aria-hidden="true" /></span>
                     </div>
-                    <label>{this.state.errorMsg}</label>
+                    {
+                        this.state.errorMsg.trim().length > 0 &&
+                        <label>{this.state.errorMsg}</label>
+                    }
+
                 </div>
 
 
