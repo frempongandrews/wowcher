@@ -3,13 +3,14 @@ const orders = require('./resources/orders.json');
 const products = require('./resources/products.json');
 
 
-let orderCount = 0;
+
 
 const getOrderCountForUser = (name) => {
+
+  let orderCount = 0;
   for (user of users) {
     if (user.name === name) {
       const userId = user.userId;
-      const orders = require('./resources/orders.json');
       for (order of orders) {
         if (order.userId === userId) {
           orderCount ++  
@@ -38,7 +39,7 @@ const getOrderCountForProduct = function(productName) {
     return orderCount;
 };
   
-function getCustomerNamesForProduct(productName) {
+const getCustomerNamesForProduct = (productName) => {
   // return ['bob', 'sue']
 
     //get productId
@@ -99,8 +100,9 @@ function getCustomerNamesForProduct(productName) {
     console.log(uniqueCustomersNamesForProduct);
     return uniqueCustomersNamesForProduct;
 
-} 
-  
+};
+
+//another endpoint
 const getMostPopularProduct = () => {
   // return ['chair']
     //get order count per product

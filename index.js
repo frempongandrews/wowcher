@@ -35,14 +35,67 @@ app.get("/orders", (req, res) => {
   })
 });
 
+app.get("/orders/by-user", (req, res) => {
+    //unique customers from orders
+    let uniqueOrderUsers = {};
+    let uniqueOrdersUsersNamesArr = [];
+    for (let order of orders) {
+        if (!uniqueOrderUsers[order.userId]) {
+            let currentUserId = order.userId;
+            uniqueOrderUsers[currentUserId] = usersObj[currentUserId];
+            uniqueOrdersUsersNamesArr.push(usersObj[currentUserId].name);
+        }
+    }
+
+    // console.log(uniqueOrderUsers);
+    // console.log(uniqueOrdersUsersNamesArr);
+
+    let ordersByUserArr = uniqueOrdersUsersNamesArr.map(userName => {
+        return {
+            customerName: userName,
+            orderCount: service.getOrderCountForUser(userName)
+        };
+    });
+
+
+    let sortedOrdersByUserArr = ordersByUserArr.sort((a, b) => {
+        return a.orderCount - b.orderCount;
+    });
+
+    return res.json({
+        orders: sortedOrdersByUserArr
+    })
+});
+
 app.get("/products", (req, res) => {
+
+    let productObj = {
+        productId: "",
+        productName: "",
+        orderCount: "",
+        customers: [],
+    };
+
+    let productsWithOrdersAndUsers = products.map(product => {
+        return {
+            productId: product.productId,
+            productName: product.productName,
+            orderCount: service.getOrderCountForProduct(product.productName),
+            customers: service.getCustomerNamesForProduct(product.productName),
+        }
+    });
 
   const productsCount = products.length;
 
     return res.json({
-        products,
+        products: productsWithOrdersAndUsers,
         productsCount
     })
+});
+
+app.get("/products/most-popular", (req, res) => {
+    let mostPopularProduct = service.getMostPopularProduct();
+
 });
 
 app.get("/users", (req, res) => {

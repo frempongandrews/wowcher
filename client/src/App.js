@@ -13,7 +13,10 @@ import {closeSidebar, openSidebar} from "./actions/appActions";
 import OrdersPage from "./pages/OrdersPage";
 import ProductsPage from "./pages/ProductsPage";
 import CustomersPage from "./pages/CustomersPage";
-import {fetchAllOrders, searchOrderById, sortOrders} from "./actions/ordersActions";
+import {
+    fetchAllOrders, searchOrderById, showAllOrders, showOrdersByCustomer,
+    sortOrders
+} from "./actions/ordersActions";
 import {fetchAllProducts} from "./actions/productsActions";
 import {fetchAllCustomers} from "./actions/customersActions";
 
@@ -41,14 +44,29 @@ class App extends Component {
         dispatch(sortOrders());
     };
 
+
+    /*orders page*/
+
     onSearchOrderById = (orderId) => {
         const { dispatch } = this.props;
         dispatch(searchOrderById(orderId));
     };
 
+    onShowAllOrders = () => {
+        const { dispatch } = this.props;
+        dispatch(showAllOrders());
+    };
+
+    onShowOrdersByCustomer = () => {
+        const { dispatch } = this.props;
+        dispatch(showOrdersByCustomer());
+    };
+
+    /* /orders page*/
+
     render () {
 
-        const { isSidebarOpened, ordersCount, productsCount, customersCount, orders, products, customers, ordersSortOrder, searchedOrders } = this.props;
+        const { isSidebarOpened, ordersCount, productsCount, customersCount, orders, products, customers, ordersSortOrder, searchedOrders, listToShow } = this.props;
         const { pathname } = this.props.location;
 
         let resourcesCountObj = {
@@ -59,10 +77,14 @@ class App extends Component {
 
         let ordersPageProps = {
             orders,
+            ordersCount,
             searchedOrders,
             ordersSortOrder,
             onSortOrders: this.onSortOrders,
-            onSearchOrderById: this.onSearchOrderById
+            onSearchOrderById: this.onSearchOrderById,
+            onShowOrdersByCustomer: this.onShowOrdersByCustomer,
+            onShowAllOrders: this.onShowAllOrders,
+            listToShow
         };
 
         let productsPageProps = {
@@ -174,7 +196,8 @@ const mapStateToProps = (state) => {
         products: state.products.products,
         productsCount: state.products.productsCount,
         ordersSortOrder: state.orders.ordersSortOrder,
-        searchedOrders: state.orders.searchedOrders
+        searchedOrders: state.orders.searchedOrders,
+        listToShow: state.orders.listToShow
     }
 };
 
@@ -187,7 +210,8 @@ App.propTypes = {
     customersCount: PropTypes.number.isRequired,
     products: PropTypes.array.isRequired,
     productsCount: PropTypes.number.isRequired,
-    ordersSortOrder: PropTypes.string.isRequired
+    ordersSortOrder: PropTypes.string.isRequired,
+    listToShow: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps)(App);
