@@ -13,7 +13,7 @@ import {closeSidebar, openSidebar} from "./actions/appActions";
 import OrdersPage from "./pages/OrdersPage";
 import ProductsPage from "./pages/ProductsPage";
 import CustomersPage from "./pages/CustomersPage";
-import {fetchAllOrders, sortOrders} from "./actions/ordersActions";
+import {fetchAllOrders, searchOrderById, sortOrders} from "./actions/ordersActions";
 import {fetchAllProducts} from "./actions/productsActions";
 import {fetchAllCustomers} from "./actions/customersActions";
 
@@ -41,9 +41,14 @@ class App extends Component {
         dispatch(sortOrders());
     };
 
+    onSearchOrderById = (orderId) => {
+        const { dispatch } = this.props;
+        dispatch(searchOrderById(orderId));
+    };
+
     render () {
 
-        const { isSidebarOpened, ordersCount, productsCount, customersCount, orders, products, customers, sortOrder } = this.props;
+        const { isSidebarOpened, ordersCount, productsCount, customersCount, orders, products, customers, sortOrder, searchedOrders } = this.props;
         const { pathname } = this.props.location;
 
         let resourcesCountObj = {
@@ -54,8 +59,10 @@ class App extends Component {
 
         let ordersPageProps = {
             orders,
+            searchedOrders,
             sortOrder,
-            onSortOrders: this.onSortOrders
+            onSortOrders: this.onSortOrders,
+            onSearchOrderById: this.onSearchOrderById
         };
 
         return (
@@ -162,13 +169,15 @@ const mapStateToProps = (state) => {
         customersCount: state.customers.customersCount,
         products: state.products.products,
         productsCount: state.products.productsCount,
-        sortOrder: state.orders.sortOrder
+        sortOrder: state.orders.sortOrder,
+        searchedOrders: state.orders.searchedOrders
     }
 };
 
 App.propTypes = {
     isSidebarOpened: PropTypes.bool.isRequired,
     orders: PropTypes.array.isRequired,
+    searchedOrders: PropTypes.array.isRequired,
     ordersCount: PropTypes.number.isRequired,
     customers: PropTypes.array.isRequired,
     customersCount: PropTypes.number.isRequired,

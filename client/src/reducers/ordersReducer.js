@@ -1,7 +1,11 @@
-import {FETCH_ORDERS_ERROR, FETCH_ORDERS_START, FETCH_ORDERS_SUCCESS, SORT_ORDERS} from "../actions/ordersActions";
+import {
+    FETCH_ORDERS_ERROR, FETCH_ORDERS_START, FETCH_ORDERS_SUCCESS, SEARCH_ORDER_BY_ID,
+    SORT_ORDERS
+} from "../actions/ordersActions";
 
 let initialState = {
     orders: [],
+    searchedOrders: [],
     ordersCount: 0,
     sortOrder: "ASC",
     currentOrder : null,
@@ -17,6 +21,7 @@ let initialState = {
 const ordersReducer = (state = initialState, action) => {
 
     switch (action.type) {
+
         case FETCH_ORDERS_START:
             return {
                 ...state,
@@ -61,6 +66,17 @@ const ordersReducer = (state = initialState, action) => {
                     orders: [...state.orders].reverse()
                 }
             }
+
+            break;
+
+        case SEARCH_ORDER_BY_ID:
+            return {
+                ...state,
+                searchedOrders: state.orders.slice(0).filter(order => {
+                    return order.orderId === action.orderId
+                })
+            };
+
         default:
             return state;
     }

@@ -5,19 +5,71 @@ import "../css/OrdersPage.css";
 
 class OrdersPage extends Component {
 
+    state = {
+        searchText: "",
+        errorMsg: ""
+    };
+    onChange = (e) => {
+        if (e.target.name = "orderNumber") {
+
+            if (e.target.value === 0) {
+                return;
+            }
+
+            //if it's a number
+            if (!isNaN(Number(e.target.value))) {
+                this.setState({
+                    searchText: Number(e.target.value),
+                    errorMsg: ""
+                }, () => {
+                    this.props.onSearchOrderById(this.state.searchText);
+                })
+            }
+
+            //if it's NOT a number
+            if (isNaN(Number(e.target.value))) {
+                this.setState({
+                    errorMsg: "Please insert a valid order number"
+                })
+            }
+
+        }
+    };
+
     render () {
 
-        const { orders, onSortOrders, sortOrder } = this.props;
+        console.log(this.state);
 
-        let ordersItems = orders.map(order => {
-           return (
-               <div className="table-row" key={order.orderId}>
-                   <li>{order.orderId}</li>
-                   <li>{order.user.name}</li>
-                   <li>{order.product.productName}</li>
-               </div>
-           )
-        });
+        const { orders, onSortOrders, sortOrder, searchedOrders } = this.props;
+        let ordersItems = [];
+        let searchedOrdersItems = [];
+
+        if (this.state.searchText === 0 ||  typeof(this.state.searchText) === "string") {
+             ordersItems = orders.map(order => {
+                return (
+                    <div className="table-row" key={order.orderId}>
+                        <li>{order.orderId}</li>
+                        <li>{order.user.name}</li>
+                        <li>{order.product.productName}</li>
+                    </div>
+                )
+            });
+        }
+
+        if (typeof (this.state.searchText) === "number") {
+            searchedOrdersItems = searchedOrders.map(order => {
+                return (
+                    <div className="table-row" key={order.orderId}>
+                        <li>{order.orderId}</li>
+                        <li>{order.user.name}</li>
+                        <li>{order.product.productName}</li>
+                    </div>
+                )
+            });
+        }
+
+
+
 
         return (
             <div id="orders-page" className="anim">
@@ -26,7 +78,11 @@ class OrdersPage extends Component {
                 </div>
 
                 <div className="search">
-                    <input placeholder="Search"/>
+                    <div>
+                        <input placeholder="Search order number" name="orderNumber" onChange={this.onChange}/>
+                        <span><i className="fa fa-search" aria-hidden="true" /></span>
+                    </div>
+                    <label>{this.state.errorMsg}</label>
                 </div>
 
 
@@ -59,6 +115,19 @@ class OrdersPage extends Component {
                         <li>Customer</li>
                         <li>Products</li>
                     </div>
+
+                    {
+                        (typeof this.state.searchText === "number") &&
+                        searchedOrdersItems.length > 0 &&
+                        searchedOrdersItems
+                    }
+
+                    {
+                        (typeof this.state.searchText === "number") &&
+                        this.state.searchText !== 0 &&
+                        searchedOrdersItems.length === 0 &&
+                        <p>No order found</p>
+                    }
 
 
                     {ordersItems}

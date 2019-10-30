@@ -25,7 +25,7 @@
 
 #orders-page .search input{
     background-color: var(--light-gray-color);
-    width: 80%;
+    width: 100%;
     border: 0 solid lightgrey;
     height: 35px;
     border-radius: 5px;
@@ -42,6 +42,36 @@
     /*outline-color: var(--main-pink-color);*/
     outline: none;
     border: 1px solid var(--main-pink-color);
+}
+
+#orders-page .search > div{
+    position: relative;
+    /*background-color: red;*/
+    /*same width as input*/
+    width: 80%;
+}
+
+#orders-page .search > div span{
+    position: absolute;
+    /*display: inline-block;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 33px;
+    width: 35px;
+    background-color: var(--main-pink-color);
+    right: 1px;
+    top: 1px;
+    border-radius: 5px;
+}
+
+#orders-page .search label{
+    color: darkred;
+    font-size: 12px;
+}
+
+#orders-page .search > div span i{
+    color: white;
 }
 
 #orders-page #orders-table .nav{
