@@ -67,7 +67,7 @@ class ProductsPage extends Component {
 
         console.log(this.state);
 
-        const { products, searchedProducts, productsCount, listToShow } = this.props;
+        const { products, searchedProducts, productsCount, listToShow, allProductsSortOrder } = this.props;
 
         const searchedProductsItems = searchedProducts.map(product => {
             return (
@@ -146,8 +146,15 @@ class ProductsPage extends Component {
                                 <span>ProductId
 
                                     {
-
+                                        allProductsSortOrder === "ASC" &&
                                         <i className="fa fa-caret-up" aria-hidden="true"
+                                           title="Sort By Id"
+                                           onClick={this.onSortAllProductsById}/>
+                                    }
+
+                                    {
+                                        allProductsSortOrder === "DSC" &&
+                                        <i className="fa fa-caret-down" aria-hidden="true"
                                            title="Sort By Id"
                                            onClick={this.onSortAllProductsById}/>
                                     }
@@ -232,7 +239,8 @@ const mapStateToProps = (state) => {
         products: state.products.products,
         searchedProducts: state.products.searchedProducts,
         productsCount: state.products.productsCount,
-        listToShow: state.products.listToShow
+        listToShow: state.products.listToShow,
+        allProductsSortOrder: state.products.allProductsSortOrder
     }
 };
 
@@ -240,7 +248,8 @@ ProductsPage.propTypes = {
     products: PropTypes.array.isRequired,
     searchedProducts: PropTypes.array.isRequired,
     listToShow: PropTypes.string.isRequired,
-    productsCount: PropTypes.number.isRequired
+    productsCount: PropTypes.number.isRequired,
+    allProductsSortOrder: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps)(ProductsPage);
