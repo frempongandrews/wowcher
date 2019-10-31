@@ -100,12 +100,21 @@
     border-bottom: 2px solid lightgray;
 }
 
+#products-page .nav .count{
+    color: var(--main-pink-color);
+    font-weight: bold;
+}
+
 #products-page #orders-table .nav li{
     list-style: none;
     padding: 15px 20px 15px 5px;
     position: relative;
     bottom: -2px;
     cursor: pointer;
+}
+
+products-page #orders-table .nav li.count{
+
 }
 
 #products-page #orders-table .nav li:first-child{

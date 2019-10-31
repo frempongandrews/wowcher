@@ -10,6 +10,8 @@ export const SHOW_ALL_PRODUCTS = "SHOW_ALL_PRODUCTS";
 export const FETCH_POPULAR_PRODUCTS_START = "FETCH_POPULAR_PRODUCTS_START";
 export const FETCH_POPULAR_PRODUCTS_SUCCESS = "FETCH_POPULAR_PRODUCTS_SUCCESS";
 export const FETCH_POPULAR_PRODUCTS_ERROR = "FETCH_POPULAR_PRODUCTS_ERROR";
+export const SORT_ALL_PRODUCTS_BY_ID = "SORT_ALL_PRODUCTS_BY_ID";
+
 
 
 export const fetchAllProducts = () => {
@@ -80,5 +82,11 @@ export const fetchPopularProducts = () => {
                     type: FETCH_POPULAR_PRODUCTS_ERROR
                 });
             })
+    }
+};
+
+export const sortAllProductsById = () => {
+    return{
+        type: SORT_ALL_PRODUCTS_BY_ID
     }
 };

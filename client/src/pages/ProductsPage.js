@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "../css/ProductsPage.css";
 import {
     fetchAllProducts, searchProductById, searchProductByName, showAllProducts,
-    showPopularProducts
+    showPopularProducts, sortAllProductsById
 } from "../actions/productsActions";
 import {LIST_TO_SHOW} from "../reducers/productsReducer";
 import PopularProducts from "../components/ProductsPage/PopularProducts";
@@ -29,6 +29,11 @@ class ProductsPage extends Component {
     onShowPopularProducts = () => {
         const { dispatch } = this.props;
         dispatch(showPopularProducts());
+    };
+
+    onSortAllProductsById = () => {
+        const { dispatch } = this.props;
+        dispatch(sortAllProductsById());
     };
 
     onChange = (e) => {
@@ -62,7 +67,7 @@ class ProductsPage extends Component {
 
         console.log(this.state);
 
-        const { products, searchedProducts, listToShow } = this.props;
+        const { products, searchedProducts, productsCount, listToShow } = this.props;
 
         const searchedProductsItems = searchedProducts.map(product => {
             return (
@@ -125,7 +130,7 @@ class ProductsPage extends Component {
                 <div id="orders-table">
 
                     <div className="nav">
-                        <li onClick={this.onShowAllProducts} className={`${listToShow === LIST_TO_SHOW.allProducts ? "active-list" : ""}`}>All Products</li>
+                        <li onClick={this.onShowAllProducts} className={`${listToShow === LIST_TO_SHOW.allProducts ? "active-list" : ""}`}>All Products <span className="count">{productsCount}</span></li>
                         <li onClick={this.onShowPopularProducts} className={`${listToShow === LIST_TO_SHOW.popular ? "active-list" : ""}`}>Popular</li>
                     </div>
 
@@ -138,16 +143,16 @@ class ProductsPage extends Component {
                         listToShow === LIST_TO_SHOW.allProducts &&
                         <div className="fields">
                             <li>
-                            <span>ProductId
+                                <span>ProductId
 
-                                {
+                                    {
 
-                                    <i className="fa fa-caret-up" aria-hidden="true"
-                                       title="Sort By Id"
-                                       onClick={null}/>
-                                }
+                                        <i className="fa fa-caret-up" aria-hidden="true"
+                                           title="Sort By Id"
+                                           onClick={this.onSortAllProductsById}/>
+                                    }
 
-                            </span>
+                                </span>
                             </li>
                             <li>ProductName</li>
                             <li>N. times ordered</li>
@@ -226,6 +231,7 @@ const mapStateToProps = (state) => {
     return {
         products: state.products.products,
         searchedProducts: state.products.searchedProducts,
+        productsCount: state.products.productsCount,
         listToShow: state.products.listToShow
     }
 };
@@ -233,7 +239,8 @@ const mapStateToProps = (state) => {
 ProductsPage.propTypes = {
     products: PropTypes.array.isRequired,
     searchedProducts: PropTypes.array.isRequired,
-    listToShow: PropTypes.string.isRequired
+    listToShow: PropTypes.string.isRequired,
+    productsCount: PropTypes.number.isRequired
 };
 
 export default connect(mapStateToProps)(ProductsPage);
