@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../css/ProductsPage.css";
-import {fetchAllProducts, searchProductById, searchProductByName} from "../actions/productsActions";
+import {
+    fetchAllProducts, searchProductById, searchProductByName, showAllProducts,
+    showPopularProducts
+} from "../actions/productsActions";
+import {LIST_TO_SHOW} from "../reducers/productsReducer";
+import PopularProducts from "../components/ProductsPage/PopularProducts";
 
 
 class ProductsPage extends Component {
@@ -15,6 +20,16 @@ class ProductsPage extends Component {
         const { dispatch } = this.props;
         await dispatch(fetchAllProducts());
     }
+
+    onShowAllProducts = () => {
+        const { dispatch } = this.props;
+        dispatch(showAllProducts());
+    };
+
+    onShowPopularProducts = () => {
+        const { dispatch } = this.props;
+        dispatch(showPopularProducts());
+    };
 
     onChange = (e) => {
         const { dispatch } = this.props;
@@ -47,7 +62,7 @@ class ProductsPage extends Component {
 
         console.log(this.state);
 
-        const { products, searchedProducts } = this.props;
+        const { products, searchedProducts, listToShow } = this.props;
 
         const searchedProductsItems = searchedProducts.map(product => {
             return (
@@ -110,9 +125,10 @@ class ProductsPage extends Component {
                 <div id="orders-table">
 
                     <div className="nav">
-                        <li>All Products</li>
-                        <li>Most popular</li>
+                        <li onClick={this.onShowAllProducts} className={`${listToShow === LIST_TO_SHOW.allProducts ? "active-list" : ""}`}>All Products</li>
+                        <li onClick={this.onShowPopularProducts} className={`${listToShow === LIST_TO_SHOW.popular ? "active-list" : ""}`}>Popular</li>
                     </div>
+
 
                     <div className="fields">
                         <li>
@@ -132,15 +148,38 @@ class ProductsPage extends Component {
                         <li>Ordered by</li>
                     </div>
 
-                    {
-                        this.state.searchText.trim() === "" &&
-                        productItems
-                    }
+                    {/*content*/}
+                    <div>
 
-                    {
-                        typeof (this.state.searchText.trim() === "string") &&
-                        searchedProductsItems
-                    }
+                        {/*All Products content*/}
+                        {
+                           listToShow === LIST_TO_SHOW.allProducts&&
+                           <div>
+                               {
+                                   this.state.searchText.trim() === "" &&
+                                   productItems
+                               }
+
+                               {
+                                   typeof (this.state.searchText.trim() === "string") &&
+                                   searchedProductsItems
+                               }
+
+                           </div>
+
+                        }
+                        {/* /All Products content*/}
+
+                        {/*All Popular content*/}
+                        {
+                            listToShow === LIST_TO_SHOW.popular &&
+                            <PopularProducts/>
+                        }
+
+                        {/* /All Popular content*/}
+
+                    </div>
+                    {/* /content*/}
 
 
                 </div>
@@ -152,13 +191,15 @@ class ProductsPage extends Component {
 const mapStateToProps = (state) => {
     return {
         products: state.products.products,
-        searchedProducts: state.products.searchedProducts
+        searchedProducts: state.products.searchedProducts,
+        listToShow: state.products.listToShow
     }
 };
 
 ProductsPage.propTypes = {
     products: PropTypes.array.isRequired,
-    searchedProducts: PropTypes.array.isRequired
+    searchedProducts: PropTypes.array.isRequired,
+    listToShow: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps)(ProductsPage);

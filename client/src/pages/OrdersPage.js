@@ -6,7 +6,7 @@ import OrdersByCustomerList from "../components/OrdersPage/OrdersByCustomerList"
 import {
     fetchOrdersByOneCustomer,
     searchOrderById, setCurrentCustomerName, setCurrentCustomerOrders, showAllOrders, showOrdersByCustomer, sortOrders,
-    sortOrdersByCustomer
+    sortOrdersByCustomerByOrderId, sortOrdersById
 } from "../actions/ordersActions";
 
 
@@ -151,14 +151,14 @@ class OrdersPage extends Component {
                                             ordersSortOrder === "ASC" &&
                                             <i className="fa fa-caret-up" aria-hidden="true"
                                                title="Sort by id"
-                                               onClick={() => this.props.dispatch(sortOrders())}/>
+                                               onClick={() => this.props.dispatch(sortOrdersById())}/>
                                         }
 
                                         {
                                             ordersSortOrder === "DSC" &&
                                             <i className="fa fa-caret-down" aria-hidden="true"
                                                title="Sort By Id"
-                                               onClick={() => this.props.dispatch(sortOrders())}/>
+                                               onClick={() => this.props.dispatch(sortOrdersById())}/>
                                         }
 
                                     </span>
@@ -180,14 +180,14 @@ class OrdersPage extends Component {
                                             ordersByCustomerSortOrder === "ASC" &&
                                             <i className="fa fa-caret-up" aria-hidden="true"
                                                title="Sort by number of orders"
-                                               onClick={() => this.props.dispatch(sortOrdersByCustomer())}/>
+                                               onClick={() => this.props.dispatch(sortOrdersByCustomerByOrderId())}/>
                                         }
 
                                         {
                                             ordersByCustomerSortOrder === "DSC" &&
                                             <i className="fa fa-caret-down" aria-hidden="true"
                                                title="Sort by number of orders"
-                                               onClick={() => this.props.dispatch(sortOrdersByCustomer())}/>
+                                               onClick={() => this.props.dispatch(sortOrdersByCustomerByOrderId())}/>
                                         }
 
                                     </span>

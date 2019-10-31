@@ -8,7 +8,7 @@ import {
     SET_SORT_ORDERS_ORDER_BY_CUSTOMER,
     SHOW_ALL_ORDERS,
     SHOW_ORDERS_BY_CUSTOMER,
-    SORT_ORDERS, SORT_ORDERS_BY_CUSTOMER
+    SORT_ORDERS, SORT_ORDERS_BY_CUSTOMER, SORT_ORDERS_BY_CUSTOMER_BY_ORDER_ID, SORT_ORDERS_BY_ID
 } from "../actions/ordersActions";
 
 
@@ -74,12 +74,14 @@ const ordersReducer = (state = initialState, action) => {
                 error: action.error
             };
 
-        case SORT_ORDERS:
+
+        case SORT_ORDERS_BY_ID:
             if (state.ordersSortOrder === "ASC") {
                 return {
                     ...state,
                     ordersSortOrder: "DSC",
-                    orders: [...state.orders].reverse()
+                    orders: [...state.orders].reverse(),
+                    searchedOrders: [...state.searchedOrders].reverse()
                 }
             }
 
@@ -87,7 +89,8 @@ const ordersReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     ordersSortOrder: "ASC",
-                    orders: [...state.orders].reverse()
+                    orders: [...state.orders].reverse(),
+                    searchedOrders: [...state.searchedOrders].reverse()
                 }
             }
 
@@ -143,7 +146,7 @@ const ordersReducer = (state = initialState, action) => {
                 areOrdersFetched: false
             };
 
-        case SORT_ORDERS_BY_CUSTOMER:
+        case SORT_ORDERS_BY_CUSTOMER_BY_ORDER_ID:
             if (state.ordersByCustomerSortOrder === "ASC") {
                 return {
                     ...state,

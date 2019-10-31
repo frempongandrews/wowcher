@@ -110,6 +110,10 @@
 
 #products-page #orders-table .nav li:first-child{
     margin-right: 20px;
+
+}
+
+#products-page #orders-table .nav .active-list{
     border-bottom: 3px solid var(--main-pink-color);
 }
 

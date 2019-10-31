@@ -3,14 +3,14 @@ import axios from "axios";
 export const FETCH_ORDERS_START = "FETCH_ORDERS_START";
 export const FETCH_ORDERS_SUCCESS = "FETCH_ORDERS_SUCCESS";
 export const FETCH_ORDERS_ERROR = "FETCH_ORDERS_ERROR";
-export const SORT_ORDERS = "SORT_ORDERS";
+export const SORT_ORDERS_BY_ID = "SORT_ORDERS_BY_ID";
 export const SEARCH_ORDER_BY_ID = "SEARCH_ORDER_BY_ID";
 export const SHOW_ORDERS_BY_CUSTOMER = "SHOW_ORDERS_BY_CUSTOMER";
 export const SHOW_ALL_ORDERS = "SHOW_ALL_ORDERS";
 export const FETCH_ORDERS_BY_CUSTOMER_START = "FETCH_ORDERS_BY_CUSTOMER_START";
 export const FETCH_ORDERS_BY_CUSTOMER_SUCCESS = "FETCH_ORDERS_BY_CUSTOMER_SUCCESS";
 export const FETCH_ORDERS_BY_CUSTOMER_ERROR = "FETCH_ORDERS_BY_CUSTOMER_ERROR";
-export const SORT_ORDERS_BY_CUSTOMER = "SORT_ORDERS_BY_CUSTOMER";
+export const SORT_ORDERS_BY_CUSTOMER_BY_ORDER_ID = "SORT_ORDERS_BY_CUSTOMER_BY_ORDER_ID";
 export const SET_SORT_ORDERS_ORDER_BY_CUSTOMER = "SET_SORT_ORDER_BY_CUSTOMER";
 export const FETCH_ORDERS_BY_ONE_CUSTOMER_START = "FETCH_ORDERS_BY_ONE_CUSTOMER_START";
 export const FETCH_ORDERS_BY_ONE_CUSTOMER_SUCCESS = "FETCH_ORDERS_BY_ONE_CUSTOMER_SUCCESS";
@@ -43,9 +43,9 @@ export const fetchAllOrders = () => {
     }
 };
 
-export const sortOrders = () => {
+export const sortOrdersById = () => {
     return {
-        type: SORT_ORDERS
+        type: SORT_ORDERS_BY_ID
     }
 };
 
@@ -129,9 +129,9 @@ export const fetchOrdersByOneCustomer = (customerName) => {
     }
 };
 
-export const sortOrdersByCustomer = () => {
+export const sortOrdersByCustomerByOrderId = () => {
     return {
-        type: SORT_ORDERS_BY_CUSTOMER
+        type: SORT_ORDERS_BY_CUSTOMER_BY_ORDER_ID
     }
 };
 

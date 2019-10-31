@@ -76,7 +76,7 @@ app.get("/products", (req, res) => {
         customers: [],
     };
 
-    let productsWithOrdersAndUsers = products.map(product => {
+    let productsWithOrderCountAndUsers = products.map(product => {
         return {
             productId: product.productId,
             productName: product.productName,
@@ -88,13 +88,30 @@ app.get("/products", (req, res) => {
   const productsCount = products.length;
 
     return res.json({
-        products: productsWithOrdersAndUsers,
+        products: productsWithOrderCountAndUsers,
         productsCount
     })
 });
 
-app.get("/products/most-popular", (req, res) => {
-    let mostPopularProduct = service.getMostPopularProduct();
+app.get("/products/popular", (req, res) => {
+    // let mostPopularProduct = service.getMostPopularProduct();
+    let productsWithOrderCountAndUsers = products.map(product => {
+        return {
+            productId: product.productId,
+            productName: product.productName,
+            orderCount: service.getOrderCountForProduct(product.productName),
+            customers: service.getCustomerNamesForProduct(product.productName),
+        }
+    });
+
+    //sort products by orderCount in DSC order
+    let sortedProductsByOrderCount = productsWithOrderCountAndUsers.sort((a, b) => {
+        return b.orderCount - a.orderCount
+    });
+
+    return res.json({
+        products: sortedProductsByOrderCount
+    })
 
 });
 
