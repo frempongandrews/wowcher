@@ -130,8 +130,14 @@ class ProductsPage extends Component {
                     </div>
 
 
-                    <div className="fields">
-                        <li>
+
+                    {/*Table fields*/}
+
+                    {/*All Products fields*/}
+                    {
+                        listToShow === LIST_TO_SHOW.allProducts &&
+                        <div className="fields">
+                            <li>
                             <span>ProductId
 
                                 {
@@ -142,11 +148,39 @@ class ProductsPage extends Component {
                                 }
 
                             </span>
-                        </li>
-                        <li>ProductName</li>
-                        <li>Num times ordered</li>
-                        <li>Ordered by</li>
-                    </div>
+                            </li>
+                            <li>ProductName</li>
+                            <li>N. times ordered</li>
+                            <li>Ordered by</li>
+                        </div>
+                    }
+                    {/* /All Products fields*/}
+
+                    {/*Popular Products fields*/}
+                    {
+                        listToShow === LIST_TO_SHOW.popular &&
+                        <div className="fields popular-fields">
+                            <li>
+                                <span>ProductId</span>
+                            </li>
+                            <li>ProductName</li>
+                            <li id="number-of-times-title">
+                                <span>N. times ordered
+                                    {
+
+                                        <i className="fa fa-caret-up" aria-hidden="true"
+                                           title="Sort By Id"
+                                           onClick={null}/>
+                                    }
+                                </span>
+                            </li>
+                            <li>Ordered by</li>
+                        </div>
+                    }
+                    {/* /Popular Products fields*/}
+
+                    {/* /Table fields*/}
+
 
                     {/*content*/}
                     <div>

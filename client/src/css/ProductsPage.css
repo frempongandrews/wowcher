@@ -123,6 +123,12 @@
     margin-top: 30px;
     border-bottom: 1px solid lightgray;
     padding-bottom: 25px;
+    font-size: 14px;
+}
+
+#products-page #orders-table .popular-fields li{
+    margin-right: 10px;
+
 }
 
 #products-page #orders-table .fields li{
@@ -146,6 +152,19 @@
     font-size: 30px;
     position: absolute;
     right: -25px;
+    top: -8px;
+    cursor: pointer;
+}
+
+#products-page #orders-table .fields li#number-of-times-title span{
+    position: relative;
+}
+
+#products-page #orders-table .fields li#number-of-times-title span i{
+    color: var(--main-pink-color);
+    font-size: 30px;
+    position: absolute;
+    right: -22px;
     top: -8px;
     cursor: pointer;
 }
