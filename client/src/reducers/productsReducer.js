@@ -2,9 +2,9 @@ import {
     FETCH_POPULAR_PRODUCTS_ERROR,
     FETCH_POPULAR_PRODUCTS_START, FETCH_POPULAR_PRODUCTS_SUCCESS,
     FETCH_PRODUCTS_ERROR, FETCH_PRODUCTS_START, FETCH_PRODUCTS_SUCCESS,
-    SEARCH_PRODUCT_BY_ID, SEARCH_PRODUCT_BY_NAME, SHOW_ALL_PRODUCTS, SHOW_POPULAR_PRODUCTS, SORT_ALL_PRODUCTS_BY_ID
+    SEARCH_PRODUCT_BY_ID, SEARCH_PRODUCT_BY_NAME, SHOW_ALL_PRODUCTS, SHOW_POPULAR_PRODUCTS, SORT_ALL_PRODUCTS_BY_ID,
+    SORT_POPULAR_PRODUCTS_BY_ORDER_COUNT
 } from "../actions/productsActions";
-import {SHOW_ALL_ORDERS} from "../actions/ordersActions";
 
 export const LIST_TO_SHOW = {
     allProducts: "ALL_PRODUCTS",
@@ -15,6 +15,7 @@ let initialState = {
     products: [],
     allProductsSortOrder: "ASC",
     popularProducts: [],
+    popularProductsSortOrder: "DSC",
     listToShow: LIST_TO_SHOW.allProducts,
     searchedProducts: [],
     productsCount: 0,
@@ -141,7 +142,22 @@ const productsReducer = (state=initialState, action) => {
             }
             break;
 
+        case SORT_POPULAR_PRODUCTS_BY_ORDER_COUNT:
+            if (state.popularProductsSortOrder === "DSC") {
+                return {
+                    ...state,
+                    popularProductsSortOrder: "ASC",
+                    popularProducts: state.popularProducts.slice(0).reverse()
+                }
+            }
 
+            if (state.popularProductsSortOrder === "ASC") {
+                return {
+                    ...state,
+                    popularProductsSortOrder: "DSC",
+                    popularProducts: state.popularProducts.slice(0).reverse()
+                }
+            }
 
 
         default:

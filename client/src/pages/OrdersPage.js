@@ -5,7 +5,7 @@ import "../css/OrdersPage.css";
 import OrdersByCustomerList from "../components/OrdersPage/OrdersByCustomerList";
 import {
     fetchOrdersByOneCustomer,
-    searchOrderById, setCurrentCustomerName, setCurrentCustomerOrders, showAllOrders, showOrdersByCustomer, sortOrders,
+    searchOrderById, setCurrentCustomerName, setCurrentCustomerOrders, showAllOrders, showOrdersByCustomer,
     sortOrdersByCustomerByOrderId, sortOrdersById
 } from "../actions/ordersActions";
 

@@ -115,18 +115,16 @@ app.get("/products/popular", (req, res) => {
 
 });
 
-
-
 //***************End Added endpoints ***************
 
-//number of orders by a customer todo: DONE
+//number of orders by a customer
 app.get('/orders/user/:name', (req, res) => {
     const userName = req.params.name;
     const orderAmount = service.getOrderCountForUser(userName);
     res.send({'ordersByCustomer': orderAmount});
 });
 
-//get number of orders by product todo
+//get number of orders by product
 app.get('/orders/product/:product', (req, res) => {
     const productName = req.params.product;
     const orderAmount = service.getOrderCountForProduct(productName);
@@ -141,7 +139,7 @@ app.get("/users", (req, res) => {
     })
 });
 
-//customers who've ordered a product todo
+//customers who've ordered a product
 app.get('/users/product/:product', (req, res) => {
   const productName = req.params.product;
   const customers = service.getCustomerNamesForProduct({'customerOrdered': productName});
