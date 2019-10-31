@@ -2,19 +2,72 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../css/ProductsPage.css";
-import {fetchAllProducts} from "../actions/productsActions";
+import {fetchAllProducts, searchProductById, searchProductByName} from "../actions/productsActions";
 
 
 class ProductsPage extends Component {
+
+    state = {
+        searchText: "",
+    };
 
     async componentDidMount () {
         const { dispatch } = this.props;
         await dispatch(fetchAllProducts());
     }
 
+    onChange = (e) => {
+        const { dispatch } = this.props;
+        //2 actions depending on value
+        let valueEntered = e.target.value;
+        if (e.target.name === "product") {
+            //not a number => search through product names
+            if (isNaN(Number(valueEntered))) {
+                console.log("**********Not a number");
+                this.setState({
+                    searchText: valueEntered
+                }, () => {
+                    dispatch(searchProductByName((valueEntered)));
+                });
+            }
+            //is a number => search through product ids
+            if (!isNaN( Number(valueEntered))) {
+                console.log("**********Is a number");
+                this.setState({
+                    searchText: valueEntered
+                }, () => {
+                    dispatch(searchProductById(Number(valueEntered)));
+                });
+
+            }
+        }
+    };
+
     render () {
 
-        const { products } = this.props;
+        console.log(this.state);
+
+        const { products, searchedProducts } = this.props;
+
+        const searchedProductsItems = searchedProducts.map(product => {
+            return (
+                <div className="table-row" key={product.productId}>
+                    <li>{product.productId}</li>
+                    <li>{product.productName}</li>
+                    <li>{product.orderCount}</li>
+                    <li>
+                        {
+                            product.customers.map((c, i) => {
+                                return (
+                                    <p key={i}>{c}</p>
+                                )
+                            })
+                        }
+
+                    </li>
+                </div>
+            )
+        });
 
         const productItems = products.map(product => {
             return (
@@ -47,7 +100,7 @@ class ProductsPage extends Component {
 
                 <div className="search">
                     <div>
-                        <input placeholder="Search product id" name="orderNumber" onChange={this.onChange}/>
+                        <input placeholder="Search product" name="product" onChange={this.onChange}/>
                         <span><i className="fa fa-search" aria-hidden="true" /></span>
                     </div>
 
@@ -79,9 +132,16 @@ class ProductsPage extends Component {
                         <li>Ordered by</li>
                     </div>
 
+                    {
+                        this.state.searchText.trim() === "" &&
+                        productItems
+                    }
 
+                    {
+                        typeof (this.state.searchText.trim() === "string") &&
+                        searchedProductsItems
+                    }
 
-                    {productItems}
 
                 </div>
             </div>
@@ -91,12 +151,14 @@ class ProductsPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        products: state.products.products
+        products: state.products.products,
+        searchedProducts: state.products.searchedProducts
     }
 };
 
 ProductsPage.propTypes = {
-    products: PropTypes.array.isRequired
+    products: PropTypes.array.isRequired,
+    searchedProducts: PropTypes.array.isRequired
 };
 
 export default connect(mapStateToProps)(ProductsPage);

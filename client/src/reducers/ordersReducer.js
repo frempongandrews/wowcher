@@ -97,7 +97,11 @@ const ordersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 searchedOrders: state.orders.slice(0).filter(order => {
-                    return order.orderId === action.orderId
+                    // return order.orderId === action.orderId
+                    let searchedOrderIdStr = action.orderId + "";
+                    let matchedOrderIdStr = order.orderId + "";
+
+                    return matchedOrderIdStr.indexOf(searchedOrderIdStr) !== -1;
                 }),
                 listToShow: listToShow.allOrders
             };
