@@ -115,13 +115,7 @@ app.get("/products/popular", (req, res) => {
 
 });
 
-app.get("/users", (req, res) => {
-    const customersCount = users.length;
-    return res.json({
-        customers: users,
-        customersCount
-    })
-});
+
 
 //***************End Added endpoints ***************
 
@@ -139,12 +133,12 @@ app.get('/orders/product/:product', (req, res) => {
     res.send({'numberOfOrders': orderAmount});
 });
 
-//get all customers and customers count todo
-app.get('/users', (req, res) => {
-  const results = require('./resources/users.json');
-  userCount += results.length;
-  const payload = {results, 'userCount': userCount};
-  res.send(payload)
+app.get("/users", (req, res) => {
+    const customersCount = users.length;
+    return res.json({
+        customers: users,
+        customersCount
+    })
 });
 
 //customers who've ordered a product todo
