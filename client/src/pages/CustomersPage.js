@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "../css/CustomersPage.css";
+import {fetchAllCustomers, sortAllCustomersById} from "../actions/customersActions";
 
 
 class CustomersPage extends Component {
@@ -10,9 +11,33 @@ class CustomersPage extends Component {
         searchText: ""
     };
 
-    render () {
-        const { customers, customersSortOrder, searchedCustomers } = this.props;
+    componentDidMount() {
+        const { dispatch } = this.props;
+        dispatch(fetchAllCustomers());
+    }
 
+    onChange = (e) => {
+
+    };
+
+    onSortAllCustomersById = () => {
+        const { dispatch } = this.props;
+        dispatch(sortAllCustomersById());
+    };
+
+    render () {
+        const { customers, customersSortOrder, searchedCustomers, customersCount } = this.props;
+
+
+        const customersItems = customers.map(customer => {
+            return (
+                <div className="table-row" key={customer.userId}>
+                    <li>{customer.userId}</li>
+                    <li>{customer.name}</li>
+                    <li>{customer.email}</li>
+                </div>
+            )
+        });
 
         return (
             <div id="customers-page" className="anim">
@@ -33,7 +58,7 @@ class CustomersPage extends Component {
                 <div id="customers-table">
 
                     <div className="nav">
-                        <li onClick={null} className={`active-list`}>All Customers <span className="count">2</span></li>
+                        <li onClick={null} className={`active-list`}>All Customers <span className="count">{customersCount}</span></li>
                     </div>
 
                     {/*Table fields*/}
@@ -45,7 +70,7 @@ class CustomersPage extends Component {
                                 {
                                     <i className="fa fa-caret-up" aria-hidden="true"
                                        title="Sort By Id"
-                                       onClick={this.onSortAllProductsById}/>
+                                       onClick={this.onSortAllCustomersById}/>
                                 }
 
                             </span>
@@ -80,11 +105,7 @@ class CustomersPage extends Component {
                                 {/*searchedProductsItems*/}
                             {/*}*/}
 
-                            <div className="table-row">
-                                <li>product.productId</li>
-                                <li>product.productName</li>
-                                <li>product.orderCount</li>
-                            </div>
+                            {customersItems}
 
                         </div>
 
@@ -104,7 +125,8 @@ const mapStateToProps = (state) => {
     return {
         customers: state.customers.customers,
         customersSortOrder: state.customers.customersSortOrder,
-        searchedCustomers: state.customers.searchedCustomers
+        searchedCustomers: state.customers.searchedCustomers,
+        customersCount: state.customers.customersCount
     }
 };
 

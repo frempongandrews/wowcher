@@ -3,6 +3,8 @@ import axios from "axios"
 export const FETCH_CUSTOMERS_START = "FETCH_CUSTOMERS_START";
 export const FETCH_CUSTOMERS_SUCCESS = "FETCH_CUSTOMERS_SUCCESS";
 export const FETCH_CUSTOMERS_ERROR = "FETCH_CUSTOMERS_ERROR";
+export const SORT_ALL_CUSTOMERS_BY_ID = "SORT_ALL_CUSTOMERS_BY_ID";
+
 
 export const fetchAllCustomers = () => {
     return (dispatch) => {
@@ -24,5 +26,11 @@ export const fetchAllCustomers = () => {
                     error: err.response.data
                 })
             })
+    }
+};
+
+export const sortAllCustomersById = () => {
+    return {
+        type: SORT_ALL_CUSTOMERS_BY_ID
     }
 };
