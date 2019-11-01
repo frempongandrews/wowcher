@@ -18,7 +18,7 @@ class OrdersPage extends Component {
     };
 
     showCustomerTotalOrders = async (e) => {
-        // console.log(e.target.title);
+
         //set current customer name
         const { dispatch } = this.props;
         let selectedCustomerName = e.target.innerText;
@@ -270,8 +270,6 @@ OrdersPage.propTypes = {
     ordersSortOrder: PropTypes.string.isRequired,
     searchedOrders: PropTypes.array.isRequired,
     listToShow: PropTypes.string.isRequired,
-
-
 };
 
 export default connect(mapStateToProps)(OrdersPage);

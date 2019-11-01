@@ -146,15 +146,6 @@ class CustomersPage extends Component {
                     <div>
 
                         <div>
-                            {/*{*/}
-                                {/*this.state.searchText.trim() === "" &&*/}
-                                {/*productItems*/}
-                            {/*}*/}
-
-                            {/*{*/}
-                                {/*typeof (this.state.searchText.trim() === "string") &&*/}
-                                {/*searchedProductsItems*/}
-                            {/*}*/}
 
                             {
                                this.state.searchText.trim().length > 0 &&
