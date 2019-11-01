@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "../css/CustomersPage.css";
-import {fetchAllCustomers, sortAllCustomersById} from "../actions/customersActions";
+import {fetchAllCustomers, sortAllCustomersById, sortAllCustomersByName} from "../actions/customersActions";
 
 
 class CustomersPage extends Component {
@@ -25,8 +25,13 @@ class CustomersPage extends Component {
         dispatch(sortAllCustomersById());
     };
 
+    onSortAllCustomersByName = () => {
+        const { dispatch } = this.props;
+        dispatch(sortAllCustomersByName());
+    };
+
     render () {
-        const { customers, customersSortOrder, searchedCustomers, customersCount } = this.props;
+        const { customers, customersSortOrder, searchedCustomers, customersCount, customersSortOrderByName } = this.props;
 
 
         const customersItems = customers.map(customer => {
@@ -87,9 +92,17 @@ class CustomersPage extends Component {
                             <span>
 
                                 {
+                                    customersSortOrderByName === "ASC" &&
                                     <i className="fa fa-caret-up" aria-hidden="true"
-                                       title="Sort By Id"
-                                       onClick={null}/>
+                                       title="Sort by name"
+                                       onClick={this.onSortAllCustomersByName}/>
+                                }
+
+                                {
+                                    customersSortOrderByName === "DSC" &&
+                                    <i className="fa fa-caret-down" aria-hidden="true"
+                                       title="Sort by name"
+                                       onClick={this.onSortAllCustomersByName}/>
                                 }
 
                                 </span>
@@ -134,14 +147,16 @@ const mapStateToProps = (state) => {
         customers: state.customers.customers,
         customersSortOrder: state.customers.customersSortOrder,
         searchedCustomers: state.customers.searchedCustomers,
-        customersCount: state.customers.customersCount
+        customersCount: state.customers.customersCount,
+        customersSortOrderByName: state.customers.customersSortOrderByName
     }
 };
 
 CustomersPage.propType = {
     customers: PropTypes.array.isRequired,
     customersSortOrder: PropTypes.string.isRequired,
-    searchedCustomers: PropTypes.array.isRequired
+    searchedCustomers: PropTypes.array.isRequired,
+    customersCount: PropTypes.number.isRequired
 };
 
 export default connect(mapStateToProps)(CustomersPage);

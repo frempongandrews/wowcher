@@ -1,11 +1,12 @@
 import {
     FETCH_CUSTOMERS_ERROR, FETCH_CUSTOMERS_START, FETCH_CUSTOMERS_SUCCESS,
-    SORT_ALL_CUSTOMERS_BY_ID
+    SORT_ALL_CUSTOMERS_BY_ID, SORT_ALL_CUSTOMERS_BY_NAME
 } from "../actions/customersActions";
 
 let initialState = {
     customers: [],
     customersSortOrder: "ASC",
+    customersSortOrderByName: "ASC",
     searchedCustomers: [],
     customersCount: 0,
     currentCustomer: null,
@@ -62,9 +63,32 @@ const customersReducer = (state=initialState, action) => {
                 return {
                     ...state,
                     customersSortOrder: "ASC",
+                    customers: state.customers.slice(0).sort((a,b) => {
+                        return a.userId - b.userId
+                    })
+                };
+            }
+
+            break;
+
+        case SORT_ALL_CUSTOMERS_BY_NAME:
+            if (state.customersSortOrderByName === "ASC") {
+                return {
+                    ...state,
+                    customersSortOrderByName: "DSC",
                     customers: state.customers.slice(0).reverse()
                 };
             }
+
+            if (state.customersSortOrderByName === "DSC") {
+                return {
+                    ...state,
+                    customersSortOrderByName: "ASC",
+                    customers: state.customers.slice(0).reverse()
+                };
+            }
+
+            break;
 
         default:
             return state;
