@@ -5,6 +5,10 @@
     animation: anim 1s ease 0ms 1;
 }
 
+#customers-page .no-customer-found{
+    margin-top: 30px;
+}
+
 @keyframes anim {
     from {
         opacity: 0;

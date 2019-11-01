@@ -25,7 +25,7 @@ class CustomersPage extends Component {
         //is a number => search by id
         if (!isNaN(Number(insertedText))) {
             this.setState({
-                searchText: Number(insertedText)
+                searchText: insertedText
             }, () => {
                 this.props.dispatch(searchCustomerById(Number(insertedText)))
             })
@@ -54,6 +54,15 @@ class CustomersPage extends Component {
     render () {
         const { customers, customersSortOrder, searchedCustomers, customersCount, customersSortOrderByName } = this.props;
 
+        const searchedCustomersItems = searchedCustomers.map(customer => {
+            return (
+                <div className="table-row" key={customer.userId}>
+                    <li>{customer.userId}</li>
+                    <li>{customer.name}</li>
+                    <li>{customer.email}</li>
+                </div>
+            )
+        });
 
         const customersItems = customers.map(customer => {
             return (
@@ -147,7 +156,22 @@ class CustomersPage extends Component {
                                 {/*searchedProductsItems*/}
                             {/*}*/}
 
-                            {customersItems}
+                            {
+                               this.state.searchText.trim().length > 0 &&
+                               searchedCustomersItems
+                            }
+
+                            {
+                                !this.state.searchText.trim().length > 0 &&
+                                customersItems
+                            }
+
+                            {
+                                this.state.searchText.trim().length > 0 &&
+                                searchedCustomersItems.length === 0 &&
+                                <p className="no-customer-found">No customer found</p>
+                            }
+
 
                         </div>
 
