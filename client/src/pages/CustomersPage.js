@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "../css/CustomersPage.css";
-import {fetchAllCustomers, sortAllCustomersById, sortAllCustomersByName} from "../actions/customersActions";
+import {
+    fetchAllCustomers, searchCustomerById, searchCustomerByName, sortAllCustomersById,
+    sortAllCustomersByName
+} from "../actions/customersActions";
 
 
 class CustomersPage extends Component {
@@ -17,7 +20,25 @@ class CustomersPage extends Component {
     }
 
     onChange = (e) => {
+        let insertedText = e.target.value.trim();
 
+        //is a number => search by id
+        if (!isNaN(Number(insertedText))) {
+            this.setState({
+                searchText: Number(insertedText)
+            }, () => {
+                this.props.dispatch(searchCustomerById(Number(insertedText)))
+            })
+        }
+
+        //is NOT a number => search by name
+        if (isNaN(Number(insertedText))) {
+            this.setState({
+                searchText: (insertedText)
+            }, () => {
+                this.props.dispatch(searchCustomerByName(insertedText));
+            })
+        }
     };
 
     onSortAllCustomersById = () => {
