@@ -68,8 +68,16 @@ class CustomersPage extends Component {
                             <span>CustomerId
 
                                 {
+                                    customersSortOrder === "ASC" &&
                                     <i className="fa fa-caret-up" aria-hidden="true"
-                                       title="Sort By Id"
+                                       title="Sort by Id"
+                                       onClick={this.onSortAllCustomersById}/>
+                                }
+
+                                {
+                                    customersSortOrder === "DSC" &&
+                                    <i className="fa fa-caret-down" aria-hidden="true"
+                                       title="Sort by Id"
                                        onClick={this.onSortAllCustomersById}/>
                                 }
 
