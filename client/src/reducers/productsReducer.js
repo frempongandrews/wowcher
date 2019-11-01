@@ -158,6 +158,7 @@ const productsReducer = (state=initialState, action) => {
                     popularProducts: state.popularProducts.slice(0).reverse()
                 }
             }
+            break;
 
 
         default:

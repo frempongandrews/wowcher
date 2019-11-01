@@ -95,7 +95,7 @@
     color: white;
 }
 
-#customers-page #orders-table .nav{
+#customers-page #customers-table .nav{
     display: flex;
     border-bottom: 2px solid lightgray;
 }
@@ -105,7 +105,7 @@
     font-weight: bold;
 }
 
-#customers-page #orders-table .nav li{
+#customers-page #customers-table .nav li{
     list-style: none;
     padding: 15px 20px 15px 5px;
     position: relative;
@@ -113,20 +113,20 @@
     cursor: pointer;
 }
 
-#customers-page #orders-table .nav li.count{
+#customers-page #customers-table .nav li.count{
 
 }
 
-#customers-page #orders-table .nav li:first-child{
+#customers-page #customers-table .nav li:first-child{
     margin-right: 20px;
 
 }
 
-#customers-page #orders-table .nav .active-list{
+#customers-page #customers-table .nav .active-list{
     border-bottom: 3px solid var(--main-pink-color);
 }
 
-#customers-page #orders-table .fields{
+#customers-page #customers-table .fields{
     display: flex;
     list-style: none;
     margin-top: 30px;
@@ -135,28 +135,28 @@
     font-size: 14px;
 }
 
-#customers-page #orders-table .popular-fields li{
+#customers-page #customers-table .popular-fields li{
     margin-right: 10px;
 
 }
 
-#customers-page #orders-table .fields li{
+#customers-page #customers-table .fields li{
     flex: 1;
     text-align: center;
     font-weight: 600;
 }
 
-#customers-page #orders-table .fields li:first-child{
+#customers-page #customers-table .fields li:first-child{
     flex: 1;
     text-align: left;
 
 }
 
-#customers-page #orders-table .fields li span{
+#customers-page #customers-table .fields li span{
     position: relative;
 }
 
-#customers-page #orders-table .fields li.customer-id i{
+#customers-page #customers-table .fields li.customer-id i{
     color: var(--main-pink-color);
     font-size: 30px;
     position: absolute;
@@ -165,7 +165,7 @@
     cursor: pointer;
 }
 
-#customers-page #orders-table .fields li.customer-name i{
+#customers-page #customers-table .fields li.customer-name i{
     color: var(--main-pink-color);
     font-size: 30px;
     position: absolute;
@@ -174,11 +174,11 @@
     cursor: pointer;
 }
 
-#customers-page #orders-table .fields li#number-of-times-title span{
+#customers-page #customers-table .fields li#number-of-times-title span{
     position: relative;
 }
 
-#customers-page #orders-table .fields li#number-of-times-title span i{
+#customers-page #customers-table .fields li#number-of-times-title span i{
     color: var(--main-pink-color);
     font-size: 30px;
     position: absolute;
@@ -187,7 +187,7 @@
     cursor: pointer;
 }
 
-#customers-page #orders-table .table-row{
+#customers-page #customers-table .table-row{
     padding-top: 35px;
     padding-bottom: 35px;
     border-bottom: 1px solid lightgray;
@@ -210,12 +210,12 @@
     }
 }
 
-#customers-page #orders-table .table-row li{
+#customers-page #customers-table .table-row li{
     flex: 1;
     text-align: center;
 }
 
-#customers-page #orders-table .table-row li:first-child{
+#customers-page #customers-table .table-row li:first-child{
     text-align: left;
     color: var(--main-pink-color);
 }
