@@ -1,10 +1,18 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import "../css/CustomersPage.css";
 
 
 class CustomersPage extends Component {
 
+    state = {
+        searchText: ""
+    };
+
     render () {
+        const { customers, customersSortOrder, searchedCustomers } = this.props;
+
 
         return (
             <div id="customers-page" className="anim">
@@ -92,4 +100,18 @@ class CustomersPage extends Component {
     }
 }
 
-export default CustomersPage;
+const mapStateToProps = (state) => {
+    return {
+        customers: state.customers.customers,
+        customersSortOrder: state.customers.customersSortOrder,
+        searchedCustomers: state.customers.searchedCustomers
+    }
+};
+
+CustomersPage.propType = {
+    customers: PropTypes.array.isRequired,
+    customersSortOrder: PropTypes.string.isRequired,
+    searchedCustomers: PropTypes.array.isRequired
+};
+
+export default connect(mapStateToProps)(CustomersPage);

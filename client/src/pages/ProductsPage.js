@@ -225,6 +225,13 @@ class ProductsPage extends Component {
                                    searchedProductsItems
                                }
 
+                               {
+                                   typeof (this.state.searchText.trim() === "string") &&
+                                   this.state.searchText.trim().length > 0 &&
+                                   searchedProductsItems.length === 0 &&
+                                   <p className="no-product-found">No products found</p>
+                               }
+
                            </div>
 
                         }
